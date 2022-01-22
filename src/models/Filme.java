@@ -20,7 +20,11 @@ public class Filme {
 		this.duracao = duracao;
 	}
 
-	public String getModalidade() {
+	public Filme(String codigo_filme, String nome2, String genero2, String modalidade2, String idioma2, String sinopse2,
+            int duracao2) {
+    }
+
+    public String getModalidade() {
 		return modalidade;
 	}
 

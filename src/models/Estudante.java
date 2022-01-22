@@ -28,4 +28,11 @@ public class Estudante extends Cliente {
 		this.siglaFaculdade = siglaFaculdade;
 	}
 
+    @Override
+    public String toString() {
+        String out = super.toString();
+        out += "\nMatrícula: " + getMatricula() 
+            + "\n Faculdade: " + getSiglaFaculdade();
+        return out;
+    }
 }
