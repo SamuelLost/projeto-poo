@@ -20,11 +20,7 @@ public class Filme {
 		this.duracao = duracao;
 	}
 
-	public Filme(String codigo_filme, String nome2, String genero2, String modalidade2, String idioma2, String sinopse2,
-            int duracao2) {
-    }
-
-    public String getModalidade() {
+	public String getModalidade() {
 		return modalidade;
 	}
 
@@ -82,7 +78,15 @@ public class Filme {
 
 	@Override
 	public String toString() {
-		return null;
+		String out = "==========================\n";
+		out += "Codigo: " + codigo + "\n";
+		out += "Nome: " + nome + "\n";
+		out += "Genero: " + genero + "\n";
+		out += "Modalidade: " + modalidade + "\n";
+		out += "Idioma: " + idioma + "\n";
+		out += "Sinopse: " + sinopse + "\n";
+		out += "Duracao: " + duracao + "\n";
+		out += "==========================";
+		return out;
 	}
-
 }

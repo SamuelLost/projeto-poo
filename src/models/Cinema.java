@@ -5,10 +5,9 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Cinema {
+
     private String nome;
-    //private Sala[] salas; //para dar certo o sort
     private List<Sala> salas;
-    private List<Filme> filmes;
     private String cidade;
 
     Scanner sc = new Scanner(System.in);
@@ -55,38 +54,17 @@ public class Cinema {
         Sala sala = new Sala(id_sala, capacidade, null, null);
         this.salas.add(sala);
 
-        //Sala[] sala = new Sala[3]
-        //sala[0] = new Sala(id, capacidade, null, null)
-        //Arrays.sort(sala);
+        // Sala[] sala = new Sala[3]
+        // sala[0] = new Sala(id, capacidade, null, null)
+        // Arrays.sort(sala);
         sc.close();
-        return true;
-    }
-
-    public boolean adicionaFilme() {
-        System.out.print("Nome do Filme: ");
-        String nome = sc.nextLine();
-        System.out.print("Código: ");
-        String codigo_filme = sc.nextLine();
-        System.out.print("Gênero: ");
-        String genero = sc.nextLine();
-        System.out.print("3D ou 2D: ");
-        String modalidade = sc.nextLine();
-        System.out.print("Dublado ou legendado: ");
-        String idioma = sc.nextLine();
-        System.out.print("Sinopse: ");
-        String sinopse = sc.nextLine();
-        System.out.print("Duração do filme: ");
-        int duracao = sc.nextInt();
-        Filme filme = new Filme(codigo_filme, nome, genero, modalidade, idioma, sinopse, duracao);
-        filmes.add(filme);
         return true;
     }
 
     public boolean inserirFilmeNaSala(int id_sala, int codigo_filme) {
         Sala sala = salas.get(id_sala - 1);
-        Filme filme = filmes.get(codigo_filme);
-        sala.setFilme(filme);
+        // Filme filme = filmes.get(codigo_filme);
+        // sala.setFilme(filme);
         return true;
     }
-
 }

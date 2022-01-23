@@ -8,7 +8,8 @@ public class Menu {
         System.out.println("3 - Remover Sala");
         System.out.println("4 - Remover Filme");
         System.out.println("5 - Remover Cliente");
-        System.out.println("6 - Adicionar filme a uma sala");
+        System.out.println("6 - Atualizar dados do filme");
+        System.out.println("7 - Adicionar filme a uma sala");
         System.out.println("0 - Sair");
     }
 

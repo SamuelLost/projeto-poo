@@ -1,13 +1,20 @@
 import java.util.Scanner;
 
 import models.Cinema;
-import models.Sala;
+import repository.FilmeFileRepository;
+import repository.IFilmeRepository;
+import services.FilmeServices;
 import utils.Console;
 import views.Menu;
 
 public class App {
     public static void main(String[] args) throws Exception {
         Cinema cinema = new Cinema("Cinema Monólitos", "Quixadá-CE");
+
+        // Injeção de dependência
+        IFilmeRepository filmeRepository = new FilmeFileRepository();
+        FilmeServices filmeServices = new FilmeServices(filmeRepository);
+        
         short op;
         Scanner sc = new Scanner(System.in);
         System.out.print(
@@ -20,7 +27,7 @@ public class App {
         if (ch.equals('S')) {
             System.out.print("Digite seu CPF: ");
             String cpf = sc.nextLine();
-            if (cpf.equals("123456789")) {
+            if (cpf.equals("123")) {
                 isAdmin = true;
             }
             // aux = verificaCPF(cpf);
@@ -40,7 +47,8 @@ public class App {
                         op = sc.nextShort();
                         break;
                     case 2:
-
+                        // cadastrar filme
+                        filmeServices.adicionaFilme();
                         op = sc.nextShort();
                         break;
                     case 3:
@@ -48,7 +56,9 @@ public class App {
                         op = sc.nextShort();
                         break;
                     case 4:
-                        System.out.println("Remover Filme");
+                        // Remove filme
+                        Console.clear();
+                        filmeServices.removeFilme();
                         op = sc.nextShort();
                         break;
                     case 5:
@@ -56,6 +66,11 @@ public class App {
                         op = sc.nextShort();
                         break;
                     case 6:
+                        // atualizar dados do filme
+                        filmeServices.updateFilme();    
+                        op = sc.nextShort();
+                        break;
+                    case 7:
                         System.out.print("Digite o id da sala: ");
                         int id_sala = sc.nextInt();
                         // cinema.adicionaFilme(id_sala);
@@ -67,12 +82,31 @@ public class App {
                         break;
                     default:
                         System.out.println("Opção inválida");
+                        op = sc.nextShort();
                         break;
                 }
             } while (op != 0);
 
         } else {
+            Console.clear();
             Menu.menuCliente();
+            op = sc.nextShort();
+
+            do {
+
+                switch (op) {
+                    case 5:
+                        // listar filme
+                        Console.clear();
+                        filmeServices.getAllFilmes();
+                        op = sc.nextShort();
+                        break;
+                    default:
+                        System.out.println("Opção inválida");
+                        op = sc.nextShort();
+                        break;
+                }
+            } while (op != 0);
         }
 
     }
