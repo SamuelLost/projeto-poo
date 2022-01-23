@@ -41,12 +41,13 @@ public class FilmeFileRepository implements IFilmeRepository {
                 int codigo = Integer.parseInt(dados[0]);
                 String nome = dados[1];
                 String genero = dados[2];
-                String modalidade = dados[3];
-                String idioma = dados[4];
-                String sinopse = dados[5];
-                String duracao = dados[6];
+                String minIdade = dados[3];
+                String modalidade = dados[4];
+                String idioma = dados[5];
+                String sinopse = dados[6];
+                String duracao = dados[7];
 
-                filmes.add(new Filme(codigo, nome, genero, modalidade, idioma, sinopse, Integer.parseInt(duracao)));
+                filmes.add(new Filme(codigo, nome, genero, Integer.parseInt(minIdade) , modalidade, idioma, sinopse, Integer.parseInt(duracao)));
                 line = br.readLine();
             }
 
@@ -81,14 +82,15 @@ public class FilmeFileRepository implements IFilmeRepository {
                 int codigoFilme = Integer.parseInt(dados[0]);
                 String nome = dados[1];
                 String genero = dados[2];
-                String modalidade = dados[3];
-                String idioma = dados[4];
-                String sinopse = dados[5];
-                String duracao = dados[6];
+                String minIdade = dados[3];
+                String modalidade = dados[4];
+                String idioma = dados[5];
+                String sinopse = dados[6];
+                String duracao = dados[7];
 
                 
                 if(codigoFilme != codigo) {
-                    filmes.add(new Filme(codigoFilme, nome, genero, modalidade, idioma, sinopse, Integer.parseInt(duracao)));
+                    filmes.add(new Filme(codigoFilme, nome, genero,Integer.parseInt(minIdade) ,modalidade, idioma, sinopse, Integer.parseInt(duracao)));
                 }
                 
                 line = br.readLine();
@@ -123,12 +125,13 @@ public class FilmeFileRepository implements IFilmeRepository {
                 if(codigo == codigoFilme){
                     String nome = dados[1];
                     String genero = dados[2];
-                    String modalidade = dados[3];
-                    String idioma = dados[4];
-                    String sinopse = dados[5];
-                    String duracao = dados[6];
+                    String minIdade = dados[3];
+                    String modalidade = dados[4];
+                    String idioma = dados[5];
+                    String sinopse = dados[6];
+                    String duracao = dados[7];
 
-                    return new Filme(codigo, nome, genero, modalidade, idioma, sinopse, Integer.parseInt(duracao));
+                    return new Filme(codigo, nome, genero,Integer.parseInt(minIdade) ,modalidade, idioma, sinopse, Integer.parseInt(duracao));
                 }
 
                 line = br.readLine();

@@ -17,13 +17,15 @@ public class FilmeServices {
         this.filmesRepository = filmesRepository;
     }   
 
-    public boolean adicionaFilme(){
+    public boolean addFilme(){
         System.out.print("Código: ");
         String codigo_filme = sc.nextLine();
         System.out.print("Nome do Filme: ");
         String nome = sc.nextLine();
         System.out.print("Gênero: ");
         String genero = sc.nextLine();
+        System.out.print("Classificação indicativa: ");
+        String minIdade = sc.nextLine();
         System.out.print("3D ou 2D: ");
         String modalidade = sc.nextLine();
         System.out.print("Dublado ou legendado: ");
@@ -33,7 +35,7 @@ public class FilmeServices {
         System.out.print("Duração do filme: ");
         int duracao = sc.nextInt();
         this.filmesRepository.addFilme(
-                new Filme(Integer.parseInt(codigo_filme), nome, genero, modalidade, idioma, sinopse, duracao));
+                new Filme(Integer.parseInt(codigo_filme), nome, genero, Integer.parseInt(minIdade) ,modalidade, idioma, sinopse, duracao));
         return true;
     }
 

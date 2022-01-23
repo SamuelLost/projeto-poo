@@ -4,20 +4,31 @@ public class Filme {
 	private int codigo;
 	private String nome;
 	private String genero;
+	private int minIdade;
 	private String modalidade;
 	private String idioma;
 	private String sinopse;
 	private int duracao;
 
-	public Filme(int codigo, String nome, String genero, String modalidade, String idioma, String sinopse,
+	public Filme(int codigo, String nome, String genero, int minIdade , String modalidade, String idioma, String sinopse,
 			int duracao) {
 		this.codigo = codigo;
 		this.nome = nome;
 		this.genero = genero;
+		this.minIdade = minIdade;
 		this.modalidade = modalidade;
 		this.idioma = idioma;
 		this.sinopse = sinopse;
 		this.duracao = duracao;
+	}
+
+
+	public int getMinIdade() {
+		return minIdade;
+	}
+
+	public void setMinIdade(int minIdade) {
+		this.minIdade = minIdade;
 	}
 
 	public String getModalidade() {
@@ -82,6 +93,7 @@ public class Filme {
 		out += "Codigo: " + codigo + "\n";
 		out += "Nome: " + nome + "\n";
 		out += "Genero: " + genero + "\n";
+		out += "Idade mínima: " + minIdade + "\n";
 		out += "Modalidade: " + modalidade + "\n";
 		out += "Idioma: " + idioma + "\n";
 		out += "Sinopse: " + sinopse + "\n";

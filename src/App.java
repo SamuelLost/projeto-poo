@@ -48,7 +48,7 @@ public class App {
                         break;
                     case 2:
                         // cadastrar filme
-                        filmeServices.adicionaFilme();
+                        filmeServices.addFilme();
                         op = sc.nextShort();
                         break;
                     case 3:
