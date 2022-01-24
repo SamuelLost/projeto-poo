@@ -51,3 +51,12 @@ Professor: Atílio Gomes Luiz
 ### 2.5 Considerações finais
     É importante destacar que podem haver mudanças no decorrer do desenvolvimento do sistema.
 
+## Diagrama de Classes - UML
+* Diagrama completo de todos os pacotes
+![Diagrama completo](docs/diagrama.png)
+
+* Diagrama do pacote Models
+![Pacote Models](docs/modelsdiagrama.png)
+
+* Diagrama pacotes Repository, Services, Views e Utils 
+![Pacotes Repository, Services, Views e Utils](docs/servicesdiagrama.png)
