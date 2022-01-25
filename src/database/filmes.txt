@@ -1,2 +1,2 @@
-1,Encanto,genero,2D,Du,Siasnidas diasndi a,120
-3,,genero,2D,Du,Siasnidas diasndi a,120
+2,Encanto,asddas,2D,15,assa,dsadsa,120
+3,Tony stark,asddas,2D,15,assa,dsadsa,120

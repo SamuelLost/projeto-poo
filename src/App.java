@@ -78,10 +78,10 @@ public class App {
                         break;
                     case 0:
                         System.out.println("Saindo...");
-                        op = sc.nextShort();
+                        System.exit(0);
                         break;
                     default:
-                        System.out.println("Opção inválida");
+                        System.out.println("Opção inválida, digite novamente!");
                         op = sc.nextShort();
                         break;
                 }
@@ -108,6 +108,8 @@ public class App {
                 }
             } while (op != 0);
         }
+
+        sc.close();
 
     }
 }

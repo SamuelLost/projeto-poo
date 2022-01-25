@@ -21,8 +21,8 @@ public class FilmeFileRepository implements IFilmeRepository {
                 FileWriter filmeFile = new FileWriter(FILENAME, true);
                 PrintWriter filmeWriter = new PrintWriter(filmeFile);
         ) {
-            String linha = String.format("%d,%s,%s,%s,%s,%s,%d", filme.getCodigo(), filme.getNome(),
-                    filme.getGenero(), filme.getModalidade(), filme.getIdioma(), filme.getSinopse(),
+            String linha = String.format("%d,%s,%s,%s,%d,%s,%s,%d", filme.getCodigo(), filme.getNome(),
+                    filme.getGenero(), filme.getModalidade(), filme.getMinIdade(),filme.getIdioma(), filme.getSinopse(),
                     filme.getDuracao());
             filmeWriter.println(linha);
         } catch (IOException e) {
@@ -41,8 +41,8 @@ public class FilmeFileRepository implements IFilmeRepository {
                 int codigo = Integer.parseInt(dados[0]);
                 String nome = dados[1];
                 String genero = dados[2];
-                String minIdade = dados[3];
-                String modalidade = dados[4];
+                String modalidade = dados[3];
+                String minIdade = dados[4];
                 String idioma = dados[5];
                 String sinopse = dados[6];
                 String duracao = dados[7];
@@ -65,9 +65,9 @@ public class FilmeFileRepository implements IFilmeRepository {
         
         if(removedFilme){
             this.addFilme(filme);
+            System.out.println("Filme atualizado com sucesso!");
             return true;
         }
-
         return false;
     }
 
@@ -79,18 +79,18 @@ public class FilmeFileRepository implements IFilmeRepository {
 
             while (line != null) {
                 String[] dados = line.split(",");
-                int codigoFilme = Integer.parseInt(dados[0]);
+                String codigoFilme = dados[0];
                 String nome = dados[1];
                 String genero = dados[2];
-                String minIdade = dados[3];
-                String modalidade = dados[4];
+                String modalidade = dados[3];
+                String minIdade = dados[4];
                 String idioma = dados[5];
                 String sinopse = dados[6];
                 String duracao = dados[7];
 
                 
-                if(codigoFilme != codigo) {
-                    filmes.add(new Filme(codigoFilme, nome, genero,Integer.parseInt(minIdade) ,modalidade, idioma, sinopse, Integer.parseInt(duracao)));
+                if(Integer.parseInt(codigoFilme) != codigo) {
+                    filmes.add(new Filme(Integer.parseInt(codigoFilme), nome, genero,Integer.parseInt(minIdade) ,modalidade, idioma, sinopse, Integer.parseInt(duracao)));
                 }
                 
                 line = br.readLine();
@@ -98,12 +98,15 @@ public class FilmeFileRepository implements IFilmeRepository {
 
             File file = new File(FILENAME);
 
-            file.delete();
+            Boolean deletedFile = file.delete();
 
-            for(Filme filme: filmes){
-                this.addFilme(filme);
+            if(deletedFile){
+                for(Filme filme: filmes){
+                    this.addFilme(filme);
+                }
+            }else {
+                System.out.println("Não foi possível deletar o filme");
             }
-
             return true;
 
         } catch (IOException e) {
@@ -125,8 +128,8 @@ public class FilmeFileRepository implements IFilmeRepository {
                 if(codigo == codigoFilme){
                     String nome = dados[1];
                     String genero = dados[2];
-                    String minIdade = dados[3];
-                    String modalidade = dados[4];
+                    String modalidade = dados[3];
+                    String minIdade = dados[4];
                     String idioma = dados[5];
                     String sinopse = dados[6];
                     String duracao = dados[7];
