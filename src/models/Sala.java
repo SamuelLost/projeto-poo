@@ -15,6 +15,11 @@ public class Sala implements Comparable<Sala> {
         this.cadeiras = cadeiras;
     }
 
+    public Sala(int id, int capacidade) {
+        this.id = id;
+        this.capacidade = capacidade;
+    }
+
     public int getId() {
         return id;
     }

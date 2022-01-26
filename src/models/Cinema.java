@@ -42,25 +42,6 @@ public class Cinema {
         this.cidade = cidade;
     }
 
-    public boolean adicionaSala() {
-        if (salas.size() == 3) {
-            return false;
-        }
-
-        System.out.println("Digite o id da sala: ");
-        int id_sala = sc.nextInt();
-        System.out.println("Digite a capacidade da sala: ");
-        int capacidade = sc.nextInt();
-        Sala sala = new Sala(id_sala, capacidade, null, null);
-        this.salas.add(sala);
-
-        // Sala[] sala = new Sala[3]
-        // sala[0] = new Sala(id, capacidade, null, null)
-        // Arrays.sort(sala);
-        sc.close();
-        return true;
-    }
-
     public boolean inserirFilmeNaSala(int id_sala, int codigo_filme) {
         Sala sala = salas.get(id_sala - 1);
         // Filme filme = filmes.get(codigo_filme);

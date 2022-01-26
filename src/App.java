@@ -3,7 +3,10 @@ import java.util.Scanner;
 import models.Cinema;
 import repository.FilmeFileRepository;
 import repository.IFilmeRepository;
+import repository.ISalaRepository;
+import repository.SalaFileRepository;
 import services.FilmeServices;
+import services.SalaServices;
 import utils.Console;
 import views.Menu;
 
@@ -14,6 +17,8 @@ public class App {
         // Injeção de dependência
         IFilmeRepository filmeRepository = new FilmeFileRepository();
         FilmeServices filmeServices = new FilmeServices(filmeRepository);
+        ISalaRepository salaRepository = new SalaFileRepository();
+        SalaServices salaServices = new SalaServices(salaRepository);
         
         short op;
         Scanner sc = new Scanner(System.in);
@@ -43,7 +48,8 @@ public class App {
 
                 switch (op) {
                     case 1:
-                        cinema.adicionaSala();
+                        Console.clear();
+                        salaServices.adicionaSala();
                         op = sc.nextShort();
                         break;
                     case 2:

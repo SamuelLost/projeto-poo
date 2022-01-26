@@ -1,6 +1,6 @@
 package models;
 
-public abstract class Cliente {
+public class Cliente {
     private String nome;
     private String cpf;
     private short idade;
