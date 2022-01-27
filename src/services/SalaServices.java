@@ -1,5 +1,6 @@
 package services;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
@@ -65,7 +66,17 @@ public class SalaServices {
     public void comprarIngresso(){
         System.out.print("Digite o id do ingresso: ");
         String ingressoId = sc.nextLine();
-        System.out.print("Digite o id da sala: ");
+
+        List<Sala> salas = this.salasRepository.getAllSalas();
+
+        System.out.println("==============================");
+        for(Sala sala: salas){
+            if(sala.getFilme() != null){
+                System.out.println(String.format("Sala %d - %s", sala.getId(), sala.getFilme().getNome()));
+            }
+        }
+
+        System.out.print("Digite o número da sala: ");
         String salaId = sc.nextLine();
 
         Sala sala = this.salasRepository.findById(Integer.parseInt(salaId));
@@ -75,21 +86,24 @@ public class SalaServices {
             return;
         }
 
-        System.out.print("Digite o cpf do cliente: ");
+        System.out.print("Digite o CPF do cliente: ");
         String cpf = sc.nextLine();
 
         Cliente cliente = this.clientesRepository.findByCpf(cpf);
 
         if(cliente == null){
             System.out.println("Cliente não encontrado!");
+            System.out.print("Digite 6 para voltar ao menu principal: ");
             return;
         }
+
+        // Listar cadeiras disponíveis
 
         System.out.print("Digite o número da cadeira: ");
         String cadeira = sc.nextLine();
 
         // Fazer uma buscar pelo numero da cadeira
-        Boolean cadeiraEstaOcupada = this.salasRepository.findByNumCadeira(Integer.parseInt(cadeira));
+        boolean cadeiraEstaOcupada = this.salasRepository.findByNumCadeira(Integer.parseInt(cadeira));
 
         if(cadeiraEstaOcupada){
             System.out.println("Cadeira ocupada!");
@@ -102,12 +116,24 @@ public class SalaServices {
         float valor = 0;
 
         if(estudanteOp.toLowerCase().equals("s")){
-            System.out.println("Digite o número da sua matricula: ");
-            String matricula = sc.nextLine();
 
-            Estudante estudante = this.estudantesRepository.findByMatricula(matricula);
+            List<String> siglas = this.estudantesRepository.findAllSiglas();
 
-            // Fazer busca pelo matricula
+            System.out.println("==================");
+            for(String sigla : siglas){
+                System.out.println(sigla);
+            }
+
+            System.out.println("Digite a sigla da sua universidade: ");
+            String siglaUniversidade = sc.nextLine();
+
+            Estudante isEstudante = this.estudantesRepository.findBySigla(siglaUniversidade.toUpperCase());
+
+            if(isEstudante == null){
+                System.out.println("Você não é estudante!");
+                return;
+            }
+
             System.out.println("O valor da seu ingresso é R$10,00");
             valor = VALOR_INGRESSO_MEIA;
         }else {
@@ -115,7 +141,7 @@ public class SalaServices {
             valor = VALOR_INGRESSO_INTEIRA;
         }
 
-        Boolean successCreateIngresso = this.salasRepository.comprarIngresso(
+        boolean successCreateIngresso = this.salasRepository.comprarIngresso(
             new Ingresso(Integer.parseInt(ingressoId), cliente, sala, valor), Integer.parseInt(cadeira)
         );
 
@@ -164,9 +190,14 @@ public class SalaServices {
 
     public void getAllSalas(){
         List<Sala> salas = this.salasRepository.getAllSalas();
+
+        Collections.sort(salas);
+        // salas.sort(null);
+
         for(Sala sala: salas){
             System.out.print(sala);
         }
+        
     }
 
     public void removeSala(){

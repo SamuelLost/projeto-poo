@@ -3,15 +3,16 @@ package repository;
 import java.util.List;
 
 import models.Cliente;
+import models.Pessoa;
 
 public interface IClienteRepository {
-    void addCliente(Cliente cliente);
+    boolean addCliente(Cliente cliente);
 
     List<Cliente> getAllClientes();
 
     boolean updateCliente(Cliente Cliente);
 
-    boolean removeCliente(int id);
+    boolean removeCliente(String cpf);
 
     Cliente findByCpf(String cpf);
 }

@@ -1,5 +1,6 @@
 package services;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
@@ -42,13 +43,15 @@ public class FilmeServices {
 
     public void getAllFilmes() {
         List<Filme> filmes = this.filmesRepository.getAllFilmes();
-
+        Collections.sort(filmes);
+        //filmes.sort(null);
         for (Filme filme : filmes) {
             System.out.println(filme.toString());
         }
     }
 
     public void removeFilme() {
+        getAllFilmes();
         System.out.print("Digite o código do filme: ");
         int codigoFilme = sc.nextInt();
 

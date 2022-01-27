@@ -61,7 +61,7 @@ public class FilmeFileRepository implements IFilmeRepository {
     @Override
     public boolean updateFilme(Filme filme) {
         
-        Boolean removedFilme = this.removeFilme(filme.getCodigo());
+        boolean removedFilme = this.removeFilme(filme.getCodigo());
         
         if(removedFilme){
             this.addFilme(filme);

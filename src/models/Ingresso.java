@@ -1,6 +1,6 @@
 package models;
 
-public class Ingresso {
+public class Ingresso implements Comparable<Ingresso> {
     private int codigo;
     private float valor;
     private Cliente cliente;
@@ -12,7 +12,7 @@ public class Ingresso {
         this.sala = sala;
         this.setValor(valor);
     }
- 
+
     public float getValor() {
         return valor;
     }
@@ -46,8 +46,14 @@ public class Ingresso {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return null;
     }
-    
+
+    @Override
+    public int compareTo(Ingresso o) {
+        // TODO Auto-generated method stub
+        return Integer.compare(this.codigo, o.getCodigo());
+    }
+
 }

@@ -1,6 +1,6 @@
 package models;
 
-public class Filme {
+public class Filme implements Comparable<Filme> {
 	private int codigo;
 	private String nome;
 	private String genero;
@@ -100,5 +100,12 @@ public class Filme {
 		out += "Duracao: " + duracao + "\n";
 		out += "==========================";
 		return out;
+	}
+
+
+	@Override
+	public int compareTo(Filme o) {
+		// TODO Auto-generated method stub
+		return Integer.compare(this.codigo, o.getCodigo());
 	}
 }

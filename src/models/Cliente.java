@@ -37,15 +37,17 @@ public class Cliente extends Pessoa implements Comparable<Cliente> {
 
     @Override
     public String toString() {
-        String out = "Nome: " + getNome() + "\nIdade: " 
-            + getIdade() + "\nCPF: " + getCpf();
+        String out = "==========================\n";
+        out += "Nome: " + this.nome + "\n";
+        out += "Idade: " + this.idade + "\n";
+        out += "CPF: " + this.cpf;
         return out;
     }
 
     @Override
     public int compareTo(Cliente o) {
         // TODO Auto-generated method stub
-        return 0;
+        return this.nome.compareTo(o.getNome());
     }
 
 }

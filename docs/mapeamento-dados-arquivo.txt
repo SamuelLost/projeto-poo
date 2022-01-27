@@ -1,3 +1,6 @@
-Arquivo salas
+Arquivo salas.txt
   id_sala, capacidade, codigo_filme ou 0
-Arquivo 
+Arquivo clientes.txt
+  nome_do_cliente, cpf_do_cliente, idade_do_cliente
+Arquivo ingresso.txt
+  id_ingresso, id_da_sala, cpf_do_cliente, numero_cadeira, preco_do_ingresso

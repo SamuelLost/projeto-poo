@@ -16,8 +16,8 @@ public class Menu {
 
     public static void menuCliente() {
         System.out.println("==========================================================");
-        System.out.println("1 - Comprar ingresso");
-        System.out.println("2 - Realizar Cadastro");
+        System.out.println("1 - Realizar Cadastro");
+        System.out.println("2 - Comprar ingresso");
         System.out.println("3 - Atualizar dados do cadastro");
         System.out.println("4 - Listar salas");
         System.out.println("5 - Listar filmes");
