@@ -1,0 +1,26 @@
+
+Comentários sobre o diagrama Models:
+
+- [] Na classe Sala, vocês têm certeza que querem passar para o construtor o Map cadeiras? 
+Eu acheo que isso não deveria ser recebido de fora, mas deveria ser uma estrutura interna, como já está. 
+Seria apenas o caso de tirar esse parâmetro do construtor. Pensem bem e vejam se faz sentido.
+
+- [] Na classe Sala, o método adicionaFilme() deve ter um argumento, assim como o adicionaCliente().
+
+- [!x] Coloquem as multiplicidades nos relacionamentos de associação, agregação e composição. 
+Isso vai ajudar a entender melhor quantos objetos de uma classe estão relacionados ao de outra. 
+Tem outras características que poderiam ser adicionadas também às relações.
+
+- [] Sala está relacionado com Ingresso por meio de composição. Ou seja, uma Sala é formada/composta por ingressos? 
+Não vi dentro da classe Sala nenhuma referência a ingressos. Esse relacionamento está errado. 
+Acho que o relacionamento aqui é de uma simples associação com uma seta indo de Ingresso para Sala.
+
+- [] Só para tirar uma dúvida: Cliente é uma classe abstrata? Se for, deve ser representado em itálico. 
+Toda classe e método abstrato deve ser escrito em itálico.
+ Lembrem que eu pedi pelo menos uma classe abstrata no trabalho. A classe não pode ser uma classe do Java, deve ser uma classe da própria aplicação.
+
+- [] Vocês disseram que poderia ter um cliente administrador e um cliente comum, mas não representaram isso no diagrama. Além disso, no diagrama apareceu um outro cliente, Estudante. Uniformizem o relatório e o diagrama para que eles fiquem iguais.
+
+- [] Vocês fizeram um bom trabalho inicial pensando nos requisitos do sistema e os diagramas ficaram muito bons.
+
+------------------------------

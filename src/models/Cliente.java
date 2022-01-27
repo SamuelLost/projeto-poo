@@ -1,6 +1,6 @@
 package models;
 
-public class Cliente {
+public class Cliente extends Pessoa implements Comparable<Cliente> {
     private String nome;
     private String cpf;
     private short idade;
@@ -40,6 +40,12 @@ public class Cliente {
         String out = "Nome: " + getNome() + "\nIdade: " 
             + getIdade() + "\nCPF: " + getCpf();
         return out;
+    }
+
+    @Override
+    public int compareTo(Cliente o) {
+        // TODO Auto-generated method stub
+        return 0;
     }
 
 }

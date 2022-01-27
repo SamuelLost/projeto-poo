@@ -1,1 +1,0 @@
-id_da_sala, numero_da_cadeira, cpf_do_cliente ou matricula

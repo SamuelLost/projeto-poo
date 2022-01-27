@@ -1,18 +1,14 @@
 package models;
 
-import java.util.Map;
-
 public class Sala implements Comparable<Sala> {
     private int id;
     private int capacidade;
     private Filme filme;
-    private Map<Integer, Cliente> cadeiras;
 
-    public Sala(int id, int capacidade, Filme filme, Map<Integer, Cliente> cadeiras) {
+    public Sala(int id, int capacidade, Filme filme) {
         this.id = id;
         this.capacidade = capacidade;
         this.filme = filme;
-        this.cadeiras = cadeiras;
     }
 
     public Sala(int id, int capacidade) {
@@ -36,13 +32,19 @@ public class Sala implements Comparable<Sala> {
         this.filme = filme;
     }
 
-    public Map<Integer, Cliente> getCadeiras() {
-        return this.cadeiras;
-    }
-
     @Override
     public String toString() {
-        return null;
+        String out = "==========================\n";
+        out += "Sala: " + this.id + "\n";
+        out += "Capacidade: " + this.capacidade + "\n";
+        
+        if(this.filme != null) {
+            out += "Filme: " + this.filme.getNome() + "\n";
+        }else{
+            out += "Filme: Sala sem filme\n";
+        }
+
+        return out;
     }
 
     /**

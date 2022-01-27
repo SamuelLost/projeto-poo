@@ -2,10 +2,11 @@ package repository;
 
 import java.util.List;
 
+import models.Ingresso;
 import models.Sala;
 
 public interface ISalaRepository {
-    void addSala(Sala sala);
+    boolean addSala(Sala sala);
 
     List<Sala> getAllSalas();
 
@@ -14,4 +15,8 @@ public interface ISalaRepository {
     boolean removeSala(int id);
 
     Sala findById(int id);
+
+    Boolean findByNumCadeira(int numCadeira);
+
+    Boolean comprarIngresso(Ingresso ingresso, int numCadeira);
 }

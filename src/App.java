@@ -1,7 +1,11 @@
 import java.util.Scanner;
 
 import models.Cinema;
+import repository.ClienteFileRepository;
+import repository.EstudanteFileRepository;
 import repository.FilmeFileRepository;
+import repository.IClienteRepository;
+import repository.IEstudanteRepository;
 import repository.IFilmeRepository;
 import repository.ISalaRepository;
 import repository.SalaFileRepository;
@@ -18,7 +22,15 @@ public class App {
         IFilmeRepository filmeRepository = new FilmeFileRepository();
         FilmeServices filmeServices = new FilmeServices(filmeRepository);
         ISalaRepository salaRepository = new SalaFileRepository();
-        SalaServices salaServices = new SalaServices(salaRepository);
+        
+        IEstudanteRepository estudanteRepository = new EstudanteFileRepository();
+        IClienteRepository clienteRepository = new ClienteFileRepository();
+        SalaServices salaServices = new SalaServices(
+            salaRepository,
+            clienteRepository,
+            estudanteRepository,
+            filmeRepository
+        );
         
         short op;
         Scanner sc = new Scanner(System.in);
@@ -48,17 +60,20 @@ public class App {
 
                 switch (op) {
                     case 1:
+                        // Cadastrar sala
                         Console.clear();
                         salaServices.adicionaSala();
                         op = sc.nextShort();
                         break;
                     case 2:
-                        // cadastrar filme
+                        // Cadastrar filme
                         filmeServices.addFilme();
                         op = sc.nextShort();
                         break;
                     case 3:
-                        System.out.println("Remover Sala");
+                        // Remover sala
+                        Console.clear();
+                        salaServices.removeSala();
                         op = sc.nextShort();
                         break;
                     case 4:
@@ -77,9 +92,15 @@ public class App {
                         op = sc.nextShort();
                         break;
                     case 7:
-                        System.out.print("Digite o id da sala: ");
-                        int id_sala = sc.nextInt();
-                        // cinema.adicionaFilme(id_sala);
+                        // adicionar filme a uma sala
+                        Console.clear();
+                        salaServices.adicionaFilmeNaSala();
+                        op = sc.nextShort();
+                        break;
+                    case 8:
+                        // Voltar ao menu principal
+                        Console.clear();
+                        Menu.menuAdmin();
                         op = sc.nextShort();
                         break;
                     case 0:
@@ -101,10 +122,26 @@ public class App {
             do {
 
                 switch (op) {
+                    case 1:
+                        Console.clear();
+                        salaServices.comprarIngresso();
+                        op = sc.nextShort();
+                        break;
+                    case 4:
+                        Console.clear();
+                        salaServices.getAllSalas();
+                        op = sc.nextShort();
+                        break;
                     case 5:
                         // listar filme
                         Console.clear();
                         filmeServices.getAllFilmes();
+                        op = sc.nextShort();
+                        break;
+                    case 6:
+                        // listar filme
+                        Console.clear();
+                        Menu.menuCliente();
                         op = sc.nextShort();
                         break;
                     default:

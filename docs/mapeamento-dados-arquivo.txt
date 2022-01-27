@@ -1,0 +1,3 @@
+Arquivo salas
+  id_sala, capacidade, codigo_filme ou 0
+Arquivo 

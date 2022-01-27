@@ -50,14 +50,14 @@ public class FilmeServices {
 
     public void removeFilme() {
         System.out.print("Digite o código do filme: ");
-        int codigo_filme = sc.nextInt();
+        int codigoFilme = sc.nextInt();
 
-        Boolean removedFilme = this.filmesRepository.removeFilme(codigo_filme);
+        Boolean removedFilme = this.filmesRepository.removeFilme(codigoFilme);
 
         if(removedFilme){
             System.out.println("Filme removido com sucesso!");
         } else {
-            System.out.println("Filme não encontrado!");
+            System.out.println("Não foi possível remover o filme!");
         }
     }
 
