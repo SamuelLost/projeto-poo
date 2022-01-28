@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import models.Cliente;
-import models.Pessoa;
 
 public class ClienteFileRepository implements IClienteRepository{
 

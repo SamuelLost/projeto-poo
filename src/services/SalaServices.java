@@ -97,7 +97,14 @@ public class SalaServices {
             return;
         }
 
-        // Listar cadeiras disponíveis
+        // Listar cadeiras ocupadas
+        List<Integer> cadeirasOcupadas = this.salasRepository.getAllCadeirasOcupadas(Integer.parseInt(salaId));
+
+        if(cadeirasOcupadas != null){
+            System.out.println("Número das cadeiras ocupadas: "+cadeirasOcupadas);
+        }else{
+            System.out.println("Pode escolher qualquer cadeira válida de 1 até "+sala.getCapacidade());
+        }
 
         System.out.print("Digite o número da cadeira: ");
         String cadeira = sc.nextLine();

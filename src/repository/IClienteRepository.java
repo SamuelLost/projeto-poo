@@ -3,7 +3,6 @@ package repository;
 import java.util.List;
 
 import models.Cliente;
-import models.Pessoa;
 
 public interface IClienteRepository {
     boolean addCliente(Cliente cliente);

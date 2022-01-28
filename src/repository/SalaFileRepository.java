@@ -201,5 +201,35 @@ public class SalaFileRepository implements ISalaRepository {
             return null;
         }
     }
-    
+
+    @Override
+    public List<Integer> getAllCadeirasOcupadas(int salaId){
+
+        // id_ingresso, id_da_sala, cpf_do_cliente, numero_cadeira, preco_do_ingresso
+        try (BufferedReader br = new BufferedReader(new FileReader(FILENAME_INGRESSO))) {
+            String line = br.readLine();
+            List<Integer> cadeirasOcupadas = new ArrayList<>();
+
+            while (line != null) {
+                String[] dados = line.split(",");
+                String salaIdFile = dados[1];
+
+                if(Integer.parseInt(salaIdFile) == salaId){
+                    String numCadeiraFile = dados[3];
+                    cadeirasOcupadas.add(Integer.parseInt(numCadeiraFile));
+                }
+
+                line = br.readLine();
+            }
+            
+            if(!cadeirasOcupadas.isEmpty()){
+                return cadeirasOcupadas;
+            }else{
+                return null;
+            }
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
+    }
 }

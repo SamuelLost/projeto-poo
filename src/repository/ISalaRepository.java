@@ -19,4 +19,6 @@ public interface ISalaRepository {
     Boolean findByNumCadeira(int numCadeira);
 
     Boolean comprarIngresso(Ingresso ingresso, int numCadeira);
+
+    List<Integer> getAllCadeirasOcupadas(int salaId);
 }
