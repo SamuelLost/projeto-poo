@@ -44,7 +44,7 @@ public class App {
         System.out.println("É administrador? (S/N)");
         Character ch = sc.nextLine().charAt(0);
         boolean isAdmin = false;
-        if (ch.equals('S')) {
+        if (ch.equals('S') || ch.equals('s')) {
             System.out.print("Digite seu CPF: ");
             String cpf = sc.nextLine();
             if (cpf.equals("123")) {

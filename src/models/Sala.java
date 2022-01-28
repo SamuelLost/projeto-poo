@@ -4,11 +4,20 @@ public class Sala implements Comparable<Sala> {
     private int id;
     private int capacidade;
     private Filme filme;
-
+    private String[][] cadeiras;
     public Sala(int id, int capacidade, Filme filme) {
         this.id = id;
         this.capacidade = capacidade;
         this.filme = filme;
+        this.cadeiras = new String[(capacidade/10)][10];
+    }
+
+    public String[][] getCadeiras() {
+        return cadeiras;
+    }
+
+    public void setCadeiras(String[][] cadeiras) {
+        this.cadeiras = cadeiras;
     }
 
     public Sala(int id, int capacidade) {

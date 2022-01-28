@@ -80,12 +80,12 @@ public class SalaServices {
         String salaId = sc.nextLine();
 
         Sala sala = this.salasRepository.findById(Integer.parseInt(salaId));
-
+        // printSala(salas.get(Integer.parseInt(salaId)-1));
         if(sala == null){
             System.out.println("Sala não encontrada!");
             return;
         }
-
+        
         System.out.print("Digite o CPF do cliente: ");
         String cpf = sc.nextLine();
 
@@ -106,9 +106,12 @@ public class SalaServices {
             System.out.println("Pode escolher qualquer cadeira válida de 1 até "+sala.getCapacidade());
         }
 
+        // printSala(sala);
+
         System.out.print("Digite o número da cadeira: ");
         String cadeira = sc.nextLine();
 
+        //Fazer o método para inserir o cliente na sala
         // Fazer uma buscar pelo numero da cadeira
         boolean cadeiraEstaOcupada = this.salasRepository.findByNumCadeira(Integer.parseInt(cadeira));
 
@@ -156,6 +159,18 @@ public class SalaServices {
             System.out.println("Ingresso reservado com sucesso!");
         }else {
             System.out.println("Não foi possível reservar o ingresso!");
+        }
+    }
+
+    public void printSala(Sala sala) {
+        String[][] salas = sala.getCadeiras();
+
+        for (int i = 0; i < salas.length; i++) {
+            for (int j = 0; j < salas[i].length; j++) {
+                if(salas[i][j] == null) System.out.print("D ");
+                else System.out.print(salas[i][j] + " "); 
+            }
+            System.out.println();
         }
     }
 
@@ -227,4 +242,6 @@ public class SalaServices {
             System.out.println("Não foi possível remover a sala!");
         }
     }
+
+    
 }
