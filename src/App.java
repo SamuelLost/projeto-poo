@@ -93,6 +93,7 @@ public class App {
                         break;
                     case 6:
                         // atualizar dados do filme
+                        Console.clear();
                         filmeServices.updateFilme();    
                         op = sc.nextShort();
                         break;
@@ -158,7 +159,7 @@ public class App {
                         op = sc.nextShort();
                         break;
                     case 6:
-                        // listar filme
+                        // Voltar para o menu
                         Console.clear();
                         Menu.menuCliente();
                         op = sc.nextShort();
@@ -168,7 +169,7 @@ public class App {
                         System.exit(0);
                         break;
                     default:
-                        System.out.println("Opção inválida");
+                        System.out.println("Opção inválida, digite novamente!");
                         op = sc.nextShort();
                         break;
                 }
