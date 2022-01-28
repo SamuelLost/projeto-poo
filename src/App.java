@@ -138,6 +138,13 @@ public class App {
                         salaServices.comprarIngresso();
                         op = sc.nextShort();
                         break;
+                    case 3:
+                        // Atualizar dados do cadastro
+                        Console.clear();
+                        // salaServices.comprarIngresso();
+                        System.out.println("Falta implementar");
+                        op = sc.nextShort();
+                        break;
                     case 4:
                         // listar salas
                         Console.clear();
