@@ -40,21 +40,15 @@ public class SalaServices {
     }
 
     public void adicionaSala() throws SalaServicesException {
-        Sala salaAlreadyExist;
-        String salaId = "";
-        do {
-            System.out.print("Digite o id da sala: ");
-            salaId = sc.nextLine();
+        System.out.print("Digite o id da sala: ");
+        String salaId = sc.nextLine();
 
-            // Buscar sala pelo id
-            salaAlreadyExist = salasRepository.findById(Integer.parseInt(salaId));
+        // Buscar sala pelo id
+        Sala salaAlreadyExist = salasRepository.findById(Integer.parseInt(salaId));
 
-            if (salaAlreadyExist != null) {
-                System.out.println("A sala com id " + salaId + " já existe.");
-                continue;
-            }
-
-        } while(salaAlreadyExist != null);
+        if (salaAlreadyExist != null) {
+            throw new SalaServicesException("A sala com id " + salaId + " já existe.");
+        }
 
         // System.out.print("Digite a capacidade da sala: ");
         // String capacidade = sc.nextLine();
