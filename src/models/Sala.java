@@ -1,6 +1,7 @@
 package models;
 
 public class Sala implements Comparable<Sala> {
+
     private int id;
     private final int CAPACIDADE = 80;
     private Filme filme;

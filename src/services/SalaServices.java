@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
+import exceptions.SalaServicesException;
 // import models.Cinema;
 import models.Cliente;
 import models.Estudante;
@@ -38,17 +39,22 @@ public class SalaServices {
         this.filmesRepository = filmeRepository;
     }
 
-    public void adicionaSala() {
-        System.out.print("Digite o id da sala: ");
-        String salaId = sc.nextLine();
+    public void adicionaSala() throws SalaServicesException {
+        Sala salaAlreadyExist;
+        String salaId = "";
+        do {
+            System.out.print("Digite o id da sala: ");
+            salaId = sc.nextLine();
 
-        // Buscar sala pelo id
-        Sala salaAlreadyExist = salasRepository.findById(Integer.parseInt(salaId));
+            // Buscar sala pelo id
+            salaAlreadyExist = salasRepository.findById(Integer.parseInt(salaId));
 
-        if (salaAlreadyExist != null) {
-            System.out.println("A sala com id " + salaId + " já existe.");
-            return;
-        }
+            if (salaAlreadyExist != null) {
+                System.out.println("A sala com id " + salaId + " já existe.");
+                continue;
+            }
+
+        } while(salaAlreadyExist != null);
 
         // System.out.print("Digite a capacidade da sala: ");
         // String capacidade = sc.nextLine();
@@ -64,7 +70,7 @@ public class SalaServices {
         }
     }
 
-    public void comprarIngresso() {
+    public void comprarIngresso() throws SalaServicesException {
         System.out.print("Digite o id do ingresso: ");
         String ingressoId = sc.nextLine();
 
@@ -84,8 +90,7 @@ public class SalaServices {
         // Sala sala = salas.get(Integer.parseInt(salaId)-1);
 
         if (sala == null) {
-            System.out.println("Sala não encontrada!");
-            return;
+            throw new SalaServicesException("Sala não encontrada!");
         }
 
         System.out.print("Digite o CPF do cliente: ");
@@ -94,9 +99,9 @@ public class SalaServices {
         Cliente cliente = this.clientesRepository.findByCpf(cpf);
 
         if (cliente == null) {
-            System.out.println("Cliente não encontrado!");
-            System.out.print("Digite 6 para voltar ao menu principal: ");
-            return;
+            throw new SalaServicesException("Cliente não encontrado!");
+            // System.out.print("Digite 6 para voltar ao menu principal: ");
+            // return;
         }
 
         // Listar cadeiras ocupadas
@@ -113,14 +118,20 @@ public class SalaServices {
             System.out.println("Número das cadeiras ocupadas: " + cadeirasOcupadas);
         } else {
             System.out.println("Pode escolher qualquer cadeira válida de 1 até " + sala.getCapacidade());
-
         }
 
         // printSala(sala);
 
+        // Deve haver um while
         System.out.print("Digite o número da cadeira: ");
         int cadeira = sc.nextInt();
         sc.nextLine();
+
+        if (cadeira > sala.getCapacidade() || cadeira < 1) {
+            System.out.println("Cadeira inválida, digite novamente!");
+            return;
+        }
+
         // boolean cadeiraEstaOcupada = sala.adicionarPessoa(cliente, cadeira);
         // printSala(sala);
         // Fazer o método para inserir o cliente na sala
@@ -152,8 +163,7 @@ public class SalaServices {
             Estudante isEstudante = this.estudantesRepository.findBySigla(siglaUniversidade.toUpperCase());
 
             if (isEstudante == null) {
-                System.out.println("Você não é estudante!");
-                return;
+                throw new SalaServicesException("Você não é estudante!");
             }
 
             System.out.println("O valor da seu ingresso é R$10,00");
@@ -175,46 +185,27 @@ public class SalaServices {
 
     public void printSala(List<Integer> assentosOcup) {
         String[][] cadeiras = criaMatriz();
-        //int aux = 0; 
+
+        // int aux = 0;
         // Descobrindo a coluna e a linha para colocar o "x"
-        for (int aux2 : assentosOcup) {
-            if(aux2 < 10) {
-                int linha = aux2%10;
-                cadeiras[1][linha] = "x";
-            } else {
-                if(aux2%10 == 0) {
-                    int linha = aux2/10;
-                    cadeiras[linha][10] = "x";
+        if (assentosOcup != null) {
+            for (int cadeira : assentosOcup) {
+                if (cadeira < 10) {
+                    int coluna = cadeira % 10;
+                    cadeiras[1][coluna] = "x";
                 } else {
-                    int linha = aux2/10;
-                    int coluna = aux2%10;
-                    cadeiras[linha+1][coluna] = "x";
+                    if (cadeira % 10 == 0) {
+                        int linha = cadeira / 10;
+                        cadeiras[linha][10] = "x";
+                    } else {
+                        int linha = cadeira / 10;
+                        int coluna = cadeira % 10;
+                        cadeiras[linha + 1][coluna] = "x";
+                    }
                 }
-            } 
+            }
         }
-        // for (int i = 1; i < cadeiras.length; i++) {
-        //     for (int j = 1; j < cadeiras[i].length; j++) {
-        //         int a;
-        //         if (assentosOcup.size() > aux) {
-        //             a = assentosOcup.get(aux);
-        //             if (Integer.parseInt(cadeiras[i][j]) == a) {
-        //                 cadeiras[i][j] = "x";
-        //                 aux++;
-        //             }
-        //         }
-        //         // else {
-        //         // aux = 0;
-        //         // if (cadeiras[i][j].contains(String.valueOf(aux))) {
-        //         // cadeiras[i][j] = "\033[31m x\033[0m";
-        //         // aux++;
-        //         // }
-        //         // }
 
-        //     }
-        //     aux = 0;
-        // }
-
-        //Imprimindo a matriz
         for (int i = 0; i < cadeiras.length; i++) {
             for (int j = 0; j < cadeiras[i].length; j++) {
                 if ((j > 0 && i > 0)) {
@@ -230,9 +221,9 @@ public class SalaServices {
                             System.out.print("\033[32m" + cadeiras[i][j] + "\033[0m ");
                         }
                     }
-                } else if (j < 10) { //Para imprimir as bordas-colunas até o 9 com espaço antes
+                } else if (j < 10) { // Para imprimir as bordas-colunas até o 9 com espaço antes
                     System.out.print(" " + cadeiras[i][j] + " ");
-                } else { //Para imprimir a bordas-coluna 10 sem espaço antes
+                } else { // Para imprimir a bordas-coluna 10 sem espaço antes
                     System.out.print(cadeiras[i][j] + " ");
                 }
             }
@@ -260,7 +251,7 @@ public class SalaServices {
     }
 
     public void adicionaFilmeNaSala() {
-        //Teste
+        // Teste
         System.out.print("Digite o id da sala: ");
         String salaId = sc.nextLine();
         List<Filme> filmes = this.filmesRepository.getAllFilmes();
