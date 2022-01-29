@@ -7,6 +7,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import models.Filme;
@@ -55,15 +56,15 @@ public class SalaFileRepository implements ISalaRepository {
             while (line != null) {
                 String[] dados = line.split(",");
                 int salaId = Integer.parseInt(dados[0]);
-                String capacidade = dados[1];
+                // String capacidade = dados[1];
                 String filmeCodigo = dados[2];
 
                 if(Integer.parseInt(filmeCodigo) != 0){
                     Filme filme = filmesRepository.findByCodigo(Integer.parseInt(filmeCodigo));
     
-                    salas.add(new Sala(salaId, Integer.parseInt(capacidade), filme));
+                    salas.add(new Sala(salaId, filme));
                 }else {
-                    salas.add(new Sala(salaId, Integer.parseInt(capacidade), null));
+                    salas.add(new Sala(salaId, null));
                 }
 
                 line = br.readLine();
@@ -97,16 +98,16 @@ public class SalaFileRepository implements ISalaRepository {
             while (line != null) {
                 String[] dados = line.split(",");
                 String salaId = dados[0];
-                String capacidade = dados[1];
+                // String capacidade = dados[1];
                 String filmeCodigo = dados[2];
                 
                 if(Integer.parseInt(salaId) != id) {
                     
                     if(Integer.parseInt(filmeCodigo) != 0){
                         Filme filme = filmesRepository.findByCodigo(Integer.parseInt(filmeCodigo));
-                        salas.add(new Sala(Integer.parseInt(salaId), Integer.parseInt(capacidade), filme));
+                        salas.add(new Sala(Integer.parseInt(salaId), filme));
                     }else{
-                        salas.add(new Sala(Integer.parseInt(salaId), Integer.parseInt(capacidade), null));
+                        salas.add(new Sala(Integer.parseInt(salaId), null));
                     }
 
                 }
@@ -142,14 +143,14 @@ public class SalaFileRepository implements ISalaRepository {
                 String salaId = dados[0];
 
                 if(Integer.parseInt(salaId) == id){
-                    String capacidade = dados[1];
+                    // String capacidade = dados[1];
                     String filmeCodigo = dados[2];
 
                     if(Integer.parseInt(filmeCodigo) != 0){
                         Filme filme = filmesRepository.findByCodigo(Integer.parseInt(filmeCodigo));
-                        return new Sala(id, Integer.parseInt(capacidade), filme);
+                        return new Sala(id, filme);
                     }else{
-                        return new Sala(id, Integer.parseInt(capacidade), null);
+                        return new Sala(id, null);
                     }
                 }
 
@@ -223,6 +224,7 @@ public class SalaFileRepository implements ISalaRepository {
             }
             
             if(!cadeirasOcupadas.isEmpty()){
+                Collections.sort(cadeirasOcupadas);
                 return cadeirasOcupadas;
             }else{
                 return null;

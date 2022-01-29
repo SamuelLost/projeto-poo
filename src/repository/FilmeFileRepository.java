@@ -7,6 +7,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import models.Filme;
@@ -50,7 +51,7 @@ public class FilmeFileRepository implements IFilmeRepository {
                 filmes.add(new Filme(codigo, nome, genero, Integer.parseInt(minIdade) , modalidade, idioma, sinopse, Integer.parseInt(duracao)));
                 line = br.readLine();
             }
-
+            Collections.sort(filmes);
             return filmes;
         } catch (IOException e) {
             System.out.println(e.getMessage());

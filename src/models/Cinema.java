@@ -42,10 +42,7 @@ public class Cinema {
         this.cidade = cidade;
     }
 
-    // public boolean inserirFilmeNaSala(int id_sala, int codigo_filme) {
-    //     Sala sala = salas.get(id_sala - 1);
-    //     // Filme filme = filmes.get(codigo_filme);
-    //     // sala.setFilme(filme);
-    //     return true;
-    // }
+    public void addSalaCinema(Sala sala) {
+        this.salas.add(sala);
+    }
 }
