@@ -62,12 +62,14 @@ Professor: Atílio Gomes Luiz
 ![Pacotes Repository, Services, Views e Utils](docs/servicesdiagrama.png)
 
 ## TODO
- - [] Corrigir menu
+ - [x] Corrigir menu
  - [] Verificar index digitado
  - [] Gerar id aleatório para o ingresso
- - [] Criar exception para regras de negócio da aplicação
- - [] Criar exception geral
- - [] While na listagem (apenas salas que não tem filme) de salas antes de inserir um filme na mesma.
+ - [x] Criar exception para regras de negócio da aplicação
+ - [x] Criar exception geral
+ - [x] While na listagem (apenas salas que não tem filme) de salas antes de inserir um filme na mesma.
  - [] Escrever comentários
  - [] Atualizar UML
  - [] Atualizar cadastro do cliente
+ - [] verificar a idade da pessoa com a classificação indicativa do filme
+ - [] Adicionar exception FILENotFount

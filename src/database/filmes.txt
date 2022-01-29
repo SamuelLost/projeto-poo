@@ -1,3 +1,0 @@
-2,Encanto,asddas,2D,15,assa,dsadsa,120
-3,Tony stark,asddas,2D,15,assa,dsadsa,120
-1,Novo nome do filme,açao,2D,18,dublado,homem aranha sem volta para casa,135

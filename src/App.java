@@ -209,6 +209,10 @@ public class App {
                 }
             } catch (SalaServicesException e) {
                 System.out.println(e.getMessage());
+            }catch (FilmeServicesException e) {
+                System.out.println(e.getMessage());
+            }catch (ClienteServicesException e) {
+                System.out.println(e.getMessage());
             }
 
         } while (!result.equals("exit"));

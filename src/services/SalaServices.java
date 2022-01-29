@@ -73,7 +73,7 @@ public class SalaServices {
         System.out.println("==============================");
         for (Sala sala : salas) {
             if (sala.getFilme() != null) {
-                System.out.println(String.format("Sala %d - %s", sala.getId(), sala.getFilme().getNome()));
+                System.out.println(String.format("Sala %d - %s - classificação indicativa: %d", sala.getId(), sala.getFilme().getNome(), sala.getFilme().getMinIdade()));
             }
         }
 
@@ -94,6 +94,10 @@ public class SalaServices {
 
         if (cliente == null) {
             throw new SalaServicesException("Cliente não encontrado!");
+        }
+
+        if(cliente.getIdade() < sala.getFilme().getMinIdade()){
+            throw new SalaServicesException("O cliente não tem idade suficiente para este filme!");
         }
 
         // Listar cadeiras ocupadas
@@ -144,7 +148,7 @@ public class SalaServices {
             System.out.println("Digite a sigla da sua universidade: ");
             String siglaUniversidade = sc.nextLine();
 
-            Estudante isEstudante = this.estudantesRepository.findBySigla(siglaUniversidade.toUpperCase(), cpf);
+            Estudante isEstudante = this.estudantesRepository.findBySigla(siglaUniversidade.toUpperCase(), cliente.getCpf());
 
             if (isEstudante == null) {
                 throw new SalaServicesException("Você não está vinculado a nenhuma universidade que possuí convênio!");
