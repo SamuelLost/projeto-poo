@@ -15,7 +15,7 @@ public class EstudanteFileRepository implements IEstudanteRepository{
     public static final String FILENAME_SIGLAS = "src/database/siglas.txt"; 
 
     @Override
-    public Estudante findBySigla(String sigla) {
+    public Estudante findBySigla(String sigla, String cpf) {
         try (BufferedReader br = new BufferedReader(new FileReader(FILENAME))) {
             String line = br.readLine();
             // nome, cpf,idade, matricula, siglaFaculdade
@@ -25,13 +25,13 @@ public class EstudanteFileRepository implements IEstudanteRepository{
                 if(dados.length == 5){
 
                     String siglaUniversidade = dados[4];
+                    String cpfFile = dados[1];
     
-                    if(siglaUniversidade.equals(sigla)){
+                    if(siglaUniversidade.equals(sigla) && cpfFile.equals(cpf)){
                         String nome = dados[0];
-                        String cpf = dados[1];
                         String idade = dados[2];
                         String matricula = dados[3];
-                        return new Estudante(nome, cpf, Short.parseShort(idade), matricula, siglaUniversidade);
+                        return new Estudante(nome, cpfFile, Short.parseShort(idade), matricula, siglaUniversidade);
                     }
                 }
 

@@ -9,6 +9,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 
 import models.Filme;
 import models.Ingresso;
@@ -166,6 +167,9 @@ public class SalaFileRepository implements ISalaRepository {
 
     @Override
     public Boolean comprarIngresso(Ingresso ingresso, int numCadeira) {
+
+        Locale.setDefault(Locale.US);
+
         try(
                 FileWriter filmeFile = new FileWriter(FILENAME_INGRESSO, true);
                 PrintWriter filmeWriter = new PrintWriter(filmeFile);

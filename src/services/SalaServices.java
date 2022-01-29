@@ -94,20 +94,12 @@ public class SalaServices {
 
         if (cliente == null) {
             throw new SalaServicesException("Cliente não encontrado!");
-            // System.out.print("Digite 6 para voltar ao menu principal: ");
-            // return;
         }
 
         // Listar cadeiras ocupadas
         List<Integer> cadeirasOcupadas = this.salasRepository.getAllCadeirasOcupadas(Integer.parseInt(salaId));
         printSala(cadeirasOcupadas);
-        // String[][] teste = criaMatriz();
-        // for (int i = 0; i < teste.length; i++) {
-        // for (int j = 0; j < teste[i].length; j++) {
-        // System.out.print(teste[i][j] + " ");
-        // }
-        // System.out.println();
-        // }
+        
         if (cadeirasOcupadas != null) {
             System.out.println("Número das cadeiras ocupadas: " + cadeirasOcupadas);
         } else {
@@ -122,8 +114,7 @@ public class SalaServices {
         sc.nextLine();
 
         if (cadeira > sala.getCapacidade() || cadeira < 1) {
-            System.out.println("Cadeira inválida, digite novamente!");
-            return;
+            throw new SalaServicesException("Cadeira inválida!");
         }
 
         // boolean cadeiraEstaOcupada = sala.adicionarPessoa(cliente, cadeira);
@@ -133,8 +124,7 @@ public class SalaServices {
         boolean cadeiraEstaOcupada = this.salasRepository.findByNumCadeira((cadeira));
 
         if (cadeiraEstaOcupada) {
-            System.out.println("Cadeira ocupada!");
-            return;
+            throw new SalaServicesException("Cadeira ocupada!");
         }
 
         System.out.print("Você é estudante? (S/N)");
@@ -154,14 +144,15 @@ public class SalaServices {
             System.out.println("Digite a sigla da sua universidade: ");
             String siglaUniversidade = sc.nextLine();
 
-            Estudante isEstudante = this.estudantesRepository.findBySigla(siglaUniversidade.toUpperCase());
+            Estudante isEstudante = this.estudantesRepository.findBySigla(siglaUniversidade.toUpperCase(), cpf);
 
             if (isEstudante == null) {
-                throw new SalaServicesException("Você não é estudante!");
+                throw new SalaServicesException("Você não está vinculado a nenhuma universidade que possuí convênio!");
             }
-
+            
             System.out.println("O valor da seu ingresso é R$10,00");
             valor = VALOR_INGRESSO_MEIA;
+
         } else {
             System.out.println("O valor da sua ingresso é R$20,00");
             valor = VALOR_INGRESSO_INTEIRA;
@@ -244,7 +235,7 @@ public class SalaServices {
         return cadeiras;
     }
 
-    public void adicionaFilmeNaSala() {
+    public void adicionaFilmeNaSala() throws SalaServicesException {
         // Teste
         System.out.print("Digite o id da sala: ");
         String salaId = sc.nextLine();
@@ -260,23 +251,18 @@ public class SalaServices {
         Filme filme = filmesRepository.findByCodigo(Integer.parseInt(filmeCodigo));
 
         if (filme == null) {
-            System.out.println("Filme não encontrado!");
-            return;
+            throw new SalaServicesException("Filme não encotrado!");
         }
 
         Sala sala = this.salasRepository.findById(Integer.parseInt(salaId));
 
         if (sala == null) {
-            System.out.println("Sala não encontrada!");
-            return;
+            throw new SalaServicesException("Sala não encontrada!");
         }
 
         sala.setFilme(filme);
         boolean successUpdateSala = this.salasRepository.updateSala(sala);
 
-        // List<Sala> salas = cinema.getSalas();
-        // salas.add(Integer.parseInt(salaId)-1, sala); //sei la
-        // cinema.setSalas(salas);
 
         if (successUpdateSala) {
             System.out.println("Filme adicionado com sucesso!");

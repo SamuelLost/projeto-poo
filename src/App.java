@@ -208,7 +208,7 @@ public class App {
                     Menu.menuCliente();
                     result = application.selecionaOperacaoCliente();
                 }
-            } catch (Exception e) {
+            } catch (SalaServicesException e) {
                 System.out.println(e.getMessage());
             }
 
