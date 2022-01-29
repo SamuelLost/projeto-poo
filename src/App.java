@@ -1,5 +1,6 @@
 import java.util.Scanner;
 
+import exceptions.ClienteServicesException;
 import exceptions.FilmeServicesException;
 import exceptions.SalaServicesException;
 import models.Cinema;
@@ -115,7 +116,7 @@ public class App {
 
     }
 
-    public String selecionaOperacaoCliente() throws SalaServicesException {
+    public String selecionaOperacaoCliente() throws SalaServicesException, ClienteServicesException {
         String op = null;
 
         Scanner sc = new Scanner(System.in);

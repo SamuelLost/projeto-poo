@@ -7,6 +7,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import models.Cliente;
@@ -46,7 +47,7 @@ public class ClienteFileRepository implements IClienteRepository{
                 clientes.add(new Cliente(nome, cpf, idade));
                 line = br.readLine();
             }
-
+            Collections.sort(clientes);
             return clientes;
         } catch (IOException e) {
             System.out.println(e.getMessage());

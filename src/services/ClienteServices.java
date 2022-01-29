@@ -1,9 +1,9 @@
 package services;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
+import exceptions.ClienteServicesException;
 import models.Cliente;
 import models.Estudante;
 import repository.IClienteRepository;
@@ -24,7 +24,7 @@ public class ClienteServices {
         this.estudantesRepository = estudantesRepository;
     }
 
-    public void addCliente(){
+    public void addCliente() throws ClienteServicesException{
         System.out.print("Digite o cpf do cliente: ");
         String cpf = sc.nextLine();
 
@@ -32,8 +32,7 @@ public class ClienteServices {
         Cliente clienteAlreadyExist = clientesRepository.findByCpf(cpf);
 
         if (clienteAlreadyExist != null) {
-            System.out.println("O cliente com cpf "+ cpf +" já existe.");
-            return;
+            throw new ClienteServicesException("O cliente com cpf "+ cpf +" já existe.");
         }
 
         System.out.print("Digite o nome do cliente: ");
@@ -51,6 +50,7 @@ public class ClienteServices {
 
             List<String> siglas = this.estudantesRepository.findAllSiglas();
             System.out.println("==========================");
+            
             for(String sigla : siglas){
                 System.out.println("- "+ sigla);
             }
@@ -85,12 +85,10 @@ public class ClienteServices {
 
     public void getAllClientes() {
         List<Cliente> clientes = clientesRepository.getAllClientes();
-        Collections.sort(clientes);
         // clientes.sort(null);
         for (Cliente cliente : clientes) {
             System.out.println(cliente);
         }
-
     }
 
     public void removeCliente() {
