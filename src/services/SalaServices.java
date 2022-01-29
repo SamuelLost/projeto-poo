@@ -260,6 +260,7 @@ public class SalaServices {
     }
 
     public void adicionaFilmeNaSala() {
+        //Teste
         System.out.print("Digite o id da sala: ");
         String salaId = sc.nextLine();
         List<Filme> filmes = this.filmesRepository.getAllFilmes();
