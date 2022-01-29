@@ -1,5 +1,6 @@
 import java.util.Scanner;
 
+import exceptions.FilmeServicesException;
 import exceptions.SalaServicesException;
 import models.Cinema;
 import repository.ClienteFileRepository;
@@ -46,7 +47,7 @@ public class App {
                 filmeRepository);
     }
 
-    public String selecionaOperacaoAdmin() throws SalaServicesException {
+    public String selecionaOperacaoAdmin() throws SalaServicesException, FilmeServicesException {
 
         Scanner sc = new Scanner(System.in);
 
@@ -119,41 +120,38 @@ public class App {
 
         Scanner sc = new Scanner(System.in);
         op = sc.nextLine();
+        
+        Console.clear();
+
         switch (op) {
             case "1":
-                Console.clear();
                 op = "CadastraCliente";
                 clienteServices.addCliente();
                 break;
             case "2":
                 // Comprar ingresso
-                Console.clear();
                 op = "ComprarIngresso";
                 salaServices.comprarIngresso();
                 // System.out.println("Digite 6 para voltar ao menu");
                 break;
             case "3":
                 // Atualizar dados do cadastro
-                Console.clear();
                 op = "AtualizarCadastroCliente";
                 // salaServices.comprarIngresso();
                 System.out.println("Falta implementar");
                 break;
             case "4":
                 // listar salas
-                Console.clear();
                 op = "ListarSalas";
                 salaServices.getAllSalas();
                 break;
             case "5":
                 // listar filme
-                Console.clear();
                 op = "ListarFilme";
                 filmeServices.getAllFilmes();
                 break;
             case "6":
                 // Voltar para o menu
-                Console.clear();
                 Menu.menuCliente();
                 break;
             case "0":

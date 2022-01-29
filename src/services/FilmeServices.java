@@ -1,9 +1,10 @@
 package services;
 
-import java.util.Collections;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
+import exceptions.FilmeServicesException;
 import models.Filme;
 import repository.IFilmeRepository;
 import utils.Console;
@@ -18,7 +19,7 @@ public class FilmeServices {
         this.filmesRepository = filmesRepository;
     }   
 
-    public boolean addFilme(){
+    public boolean addFilme() throws InputMismatchException {
         System.out.print("Código: ");
         String codigo_filme = sc.nextLine();
         System.out.print("Nome do Filme: ");
@@ -43,8 +44,14 @@ public class FilmeServices {
 
     public void getAllFilmes() {
         List<Filme> filmes = this.filmesRepository.getAllFilmes();
-        Collections.sort(filmes);
+        
+        if(filmes.isEmpty()){
+            System.out.println("Nenhum filme foi encontrado!");
+            return;
+        }
+
         //filmes.sort(null);
+
         for (Filme filme : filmes) {
             System.out.println(filme.toString());
         }
@@ -55,7 +62,7 @@ public class FilmeServices {
         System.out.print("Digite o código do filme: ");
         int codigoFilme = sc.nextInt();
 
-        Boolean removedFilme = this.filmesRepository.removeFilme(codigoFilme);
+        boolean removedFilme = this.filmesRepository.removeFilme(codigoFilme);
 
         if(removedFilme){
             System.out.println("Filme removido com sucesso!");
@@ -64,19 +71,20 @@ public class FilmeServices {
         }
     }
 
-    public void updateFilme(){
+    public void updateFilme() throws FilmeServicesException{
 
         Filme filme = null;
-        Boolean updatedSuccessFilme = false;
+        boolean updatedSuccessFilme = false;
 
+        this.getAllFilmes();
+        
         System.out.println("Digite o código do filme: ");
         String codigoFilme = sc.nextLine();
 
         filme = this.filmesRepository.findByCodigo(Integer.parseInt(codigoFilme));
         
         if(filme == null){
-            System.out.println("Filme não encontrado!");
-            return;
+            throw new FilmeServicesException("Filme não encontrado!");
         }
 
         Console.clear();
