@@ -2,6 +2,7 @@ package repository;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -53,6 +54,8 @@ public class FilmeFileRepository implements IFilmeRepository {
             }
             Collections.sort(filmes);
             return filmes;
+        }catch (FileNotFoundException e) {
+            return null;
         } catch (IOException e) {
             System.out.println(e.getMessage());
             return null;
@@ -110,7 +113,9 @@ public class FilmeFileRepository implements IFilmeRepository {
             }
             return true;
 
-        } catch (IOException e) {
+        }catch (FileNotFoundException e) {
+            return false;
+        }catch (IOException e) {
             System.out.println(e.getMessage());
             return false;
         }
@@ -141,6 +146,8 @@ public class FilmeFileRepository implements IFilmeRepository {
                 line = br.readLine();
             }
 
+            return null;
+        }catch (FileNotFoundException e) {
             return null;
         } catch (IOException e) {
             System.out.println(e.getMessage());

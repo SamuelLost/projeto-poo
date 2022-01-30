@@ -72,4 +72,4 @@ Professor: Atílio Gomes Luiz
  - [] Atualizar UML
  - [] Atualizar cadastro do cliente
  - [] verificar a idade da pessoa com a classificação indicativa do filme
- - [] Adicionar exception FILENotFount
+ - [x] Adicionar exception FILENotFount

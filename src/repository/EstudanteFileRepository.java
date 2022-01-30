@@ -1,6 +1,7 @@
 package repository;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -39,6 +40,8 @@ public class EstudanteFileRepository implements IEstudanteRepository{
             }
 
             return null;
+        }catch (FileNotFoundException e) {
+            return null;
         } catch (IOException e) {
             System.out.println(e.getMessage());
             return null;
@@ -57,6 +60,8 @@ public class EstudanteFileRepository implements IEstudanteRepository{
             }
 
             return siglas;
+        }catch (FileNotFoundException e) {
+            return null;
         } catch (IOException e) {
             System.out.println(e.getMessage());
             return null;

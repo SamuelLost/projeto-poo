@@ -2,6 +2,7 @@ package repository;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -72,6 +73,8 @@ public class SalaFileRepository implements ISalaRepository {
             }
 
             return salas;
+        }catch (FileNotFoundException e) {
+            return null;
         } catch (IOException e) {
             System.out.println(e.getMessage());
             return null;
@@ -127,6 +130,8 @@ public class SalaFileRepository implements ISalaRepository {
                 return false;
             }
             return true;
+        }catch (FileNotFoundException e) {
+            return false;
         } catch (IOException e) {
             System.out.println(e.getMessage());
             return false;
@@ -158,6 +163,8 @@ public class SalaFileRepository implements ISalaRepository {
                 line = br.readLine();
             }
 
+            return null;
+        }catch (FileNotFoundException e) {
             return null;
         } catch (IOException e) {
             System.out.println(e.getMessage());
@@ -201,6 +208,8 @@ public class SalaFileRepository implements ISalaRepository {
             }
 
             return false;
+        }catch (FileNotFoundException e) {
+            return null;
         } catch (IOException e) {
             System.out.println(e.getMessage());
             return null;
@@ -233,6 +242,8 @@ public class SalaFileRepository implements ISalaRepository {
             }else{
                 return null;
             }
+        }catch (FileNotFoundException e) {
+            return null;
         } catch (IOException e) {
             System.out.println(e.getMessage());
             return null;

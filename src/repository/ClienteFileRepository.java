@@ -50,6 +50,8 @@ public class ClienteFileRepository implements IClienteRepository{
             }
             Collections.sort(clientes);
             return clientes;
+        }catch (FileNotFoundException e) {
+            return null;
         } catch (IOException e) {
             System.out.println(e.getMessage());
             return null;
@@ -94,6 +96,8 @@ public class ClienteFileRepository implements IClienteRepository{
             }
             return true;
 
+        }catch (FileNotFoundException e) {
+            return false;
         } catch (IOException e) {
             System.out.println(e.getMessage());
             return false;
