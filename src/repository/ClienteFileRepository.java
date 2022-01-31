@@ -59,8 +59,14 @@ public class ClienteFileRepository implements IClienteRepository{
     }
 
     @Override
-    public boolean updateCliente(Cliente Cliente) {
-        // TODO Auto-generated method stub
+    public boolean updateCliente(Cliente cliente) {
+        boolean removedFilme = this.removeCliente(cliente.getCpf());
+        
+        if(removedFilme){
+            this.addCliente(cliente);
+            System.out.println("Cliente atualizado com sucesso!");
+            return true;
+        }
         return false;
     }
 

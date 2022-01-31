@@ -138,8 +138,7 @@ public class App {
             case "3":
                 // Atualizar dados do cadastro
                 op = "AtualizarCadastroCliente";
-                // salaServices.comprarIngresso();
-                System.out.println("Falta implementar");
+                clienteServices.updateCliente();
                 break;
             case "4":
                 // listar salas
@@ -150,10 +149,6 @@ public class App {
                 // listar filme
                 op = "ListarFilme";
                 filmeServices.getAllFilmes();
-                break;
-            case "6":
-                // Voltar para o menu
-                Menu.menuCliente();
                 break;
             case "0":
                 System.out.println("Aplicação finalizada");

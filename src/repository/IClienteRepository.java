@@ -9,7 +9,7 @@ public interface IClienteRepository {
 
     List<Cliente> getAllClientes();
 
-    boolean updateCliente(Cliente Cliente);
+    boolean updateCliente(Cliente cliente);
 
     boolean removeCliente(String cpf);
 
