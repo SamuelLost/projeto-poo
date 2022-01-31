@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Scanner;
 
 import exceptions.SalaServicesException;
-// import models.Cinema;
 import models.Cliente;
 import models.Estudante;
 import models.Filme;
@@ -28,6 +27,13 @@ public class SalaServices {
 
     Scanner sc = new Scanner(System.in);
 
+    /**
+     * 
+     * @param salasRepository Repositório para persistir os dados da sala
+     * @param clienteRepository Repositório para persistir os dados do cliente
+     * @param estudanteRepository Repositório para persistir os dados do estudante
+     * @param filmeRepository Repositório para persistir os dados dos filmes
+     */
     public SalaServices(
             ISalaRepository salasRepository,
             IClienteRepository clienteRepository,
@@ -39,6 +45,10 @@ public class SalaServices {
         this.filmesRepository = filmeRepository;
     }
 
+    /**
+     * Método responsável pela criação de uma instância de Sala
+     * @throws SalaServicesException Exceção no caso de tentar criar um nova sala com um id já existente
+     */
     public void adicionaSala() throws SalaServicesException {
         System.out.print("Digite o id da sala: ");
         String salaId = sc.nextLine();
