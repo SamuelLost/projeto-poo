@@ -10,7 +10,6 @@ public class Menu {
         System.out.println("5 - Remover Cliente");
         System.out.println("6 - Atualizar dados do filme");
         System.out.println("7 - Adicionar filme a uma sala");
-        System.out.println("8 - Voltar ao menu principal");
         System.out.println("0 - Sair");
     }
 
@@ -21,7 +20,6 @@ public class Menu {
         System.out.println("3 - Atualizar dados do cadastro");
         System.out.println("4 - Listar salas");
         System.out.println("5 - Listar filmes");
-        System.out.println("6 - Voltar ao menu principal");
         System.err.println("0 - Sair");
     }
 }
