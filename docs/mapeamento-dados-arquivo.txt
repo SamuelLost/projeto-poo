@@ -1,14 +1,21 @@
 Arquivo salas.txt
   id_sala, capacidade, codigo_filme ou 0
+
 Arquivo clientes.txt
-  nome_do_cliente, cpf_do_cliente, idade_do_cliente
+  nome_do_cliente, cpf_do_cliente, idade_do_cliente, matricula(Apenas para estudante), sigla(Apenas para estudante)
+
 Arquivo ingresso.txt
   id_ingresso, id_da_sala, cpf_do_cliente, numero_cadeira, preco_do_ingresso
+
 Arquivo filmes.txt
   id_filme, nome_do_filme, genero, modalidade, classificacao, sinopse, duracao
+
 Arquivos siglas.txt
   UFC
   UNICATOLICA
   UNIFOR
   UECE
   IFCE
+
+Arquivo adms.txt
+  nome, cpf

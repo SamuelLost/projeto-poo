@@ -10,6 +10,16 @@ public class Filme implements Comparable<Filme> {
 	private String sinopse;
 	private int duracao;
 
+	/**
+     * Construtor para a classe herdeira
+     * @param nome - nome do do filme
+     * @param genero - genero do filme
+     * @param minIdade - classificação indicativa
+	 * @param modalidade - modalidade do filme: 3D ou 2D
+	 * @param idioma - legendado ou dublado
+	 * @param sinopse - sinopse do filme
+	 * @param duracao - duração em minutos do filme
+     */
 	public Filme(int codigo, String nome, String genero, int minIdade , String modalidade, String idioma, String sinopse,
 			int duracao) {
 		this.codigo = codigo;
@@ -22,7 +32,9 @@ public class Filme implements Comparable<Filme> {
 		this.duracao = duracao;
 	}
 
-
+	/**
+	 * GETTERS e SETTERS
+	 */
 	public int getMinIdade() {
 		return minIdade;
 	}
@@ -39,12 +51,12 @@ public class Filme implements Comparable<Filme> {
 		this.modalidade = modalidade;
 	}
 
-	public String getIdioma() {
-		return idioma;
-	}
-
 	public void setIdioma(String idioma) {
 		this.idioma = idioma;
+	}
+
+	public String getIdioma() {
+		return idioma;
 	}
 
 	public int getCodigo() {
@@ -87,6 +99,9 @@ public class Filme implements Comparable<Filme> {
 		this.duracao = duracao;
 	}
 
+	/**
+	 * Imprimindo as informações acerca do
+	 */
 	@Override
 	public String toString() {
 		String out = "==========================\n";
@@ -102,7 +117,18 @@ public class Filme implements Comparable<Filme> {
 		return out;
 	}
 
-
+	/**
+     * Override do método compareTo() da interface Comparable.
+     * Esse método é sobrescrito para que possa ser possível a ordenação
+     * de objetos Filmes. A comparação e ordenação é feita a partir 
+     * de seus códigos usando o próprio compare() da classe <code>Integer</code>.
+     *  
+     * @param o - objeto filme
+     * @return um <code>integer</code> representando a comparação. 
+     * 0 - se for igual;
+     * menor que 0 se o código do objeto for menor numericamente que a passada por argumento;
+     * maior que 0 se o código do objeto for maior numericamente que a passada por argumento.
+     */
 	@Override
 	public int compareTo(Filme o) {
 		// TODO Auto-generated method stub

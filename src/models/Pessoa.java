@@ -1,10 +1,14 @@
 package models;
 
+//Classe abstrata para uma pessoa
 public abstract class Pessoa {
-    private String nome;
-    private String cpf;
-    private short idade;
+    private String nome; // nome da pessoa
+    private String cpf; // cpf da pessoa
+    private short idade; // idade da pessoa
 
+    /**
+     * GETTERS e SETTERS
+     */
     public String getNome() {
         return nome;
     }
@@ -24,5 +28,6 @@ public abstract class Pessoa {
         this.idade = idade;
     }
 
+    //Método abstrato que vai ser sobrescrito
     public abstract String toString();
 }

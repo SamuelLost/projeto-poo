@@ -14,7 +14,9 @@ import repository.IClienteRepository;
 import repository.IEstudanteRepository;
 import repository.IFilmeRepository;
 import repository.ISalaRepository;
-
+/**
+ * Classe de serviços relacionados a entidade de cliente
+ */
 public class SalaServices {
 
     public static final float VALOR_INGRESSO_MEIA = 10;
@@ -28,6 +30,7 @@ public class SalaServices {
     Scanner sc = new Scanner(System.in);
 
     /**
+     * Construtor SalaServices
      * 
      * @param salasRepository Repositório para persistir os dados da sala
      * @param clienteRepository Repositório para persistir os dados do cliente
@@ -47,6 +50,9 @@ public class SalaServices {
 
     /**
      * Método responsável pela criação de uma instância de Sala
+     * 
+     * @see repository.ISalaRepository#addSala(Sala)
+     * @see repository.ISalaRepository#findById(int)
      * @throws SalaServicesException Exceção no caso de tentar criar um nova sala com um id já existente
      */
     public void adicionaSala() throws SalaServicesException {
@@ -74,10 +80,26 @@ public class SalaServices {
         }
     }
 
+    /**
+     * Método de serviço para a compra de um ingresso
+     * 
+     * @see repository.ISalaRepository#getAllSalas()
+     * @see repository.ISalaRepository#findById(int)
+     * @see repository.ISalaRepository#getAllCadeirasOcupadas(int)
+     * @see repository.ISalaRepository#findById(int)
+     * @see repository.ISalaRepository#comprarIngresso(Ingresso, int)
+     * @see repository.IEstudanteRepository#findAllSiglas()
+     * @see repository.IEstudanteRepository#findBySigla(String, String)
+     * @see repository.IClienteRepository#findByCpf(String)
+     * 
+     * @throws SalaServicesException 
+     *  - Exceção no caso do usuário selecionar uma sala que não existe.
+     *  - Exceção no caso do usuário entrar com um CPF que não está na base de dados
+     *  - Exceção no caso do usuário tiver com idade inferior determinada pela classificação indicativa do filme.
+     *  - Exceção no caso do usuário selecionar uma cadeira com numeração inválida
+     *  -   
+     */
     public void comprarIngresso() throws SalaServicesException {
-        // System.out.print("Digite o id do ingresso: ");
-        // String ingressoId = sc.nextLine();
-
         List<Sala> salas = this.salasRepository.getAllSalas();
         // List<Sala> salas = cinema.getSalas();
         System.out.println("==============================");
@@ -131,10 +153,6 @@ public class SalaServices {
             throw new SalaServicesException("Cadeira inválida!");
         }
 
-        // boolean cadeiraEstaOcupada = sala.adicionarPessoa(cliente, cadeira);
-        // printSala(sala);
-        // Fazer o método para inserir o cliente na sala
-        // Fazer uma buscar pelo numero da cadeira
         boolean cadeiraEstaOcupada = this.salasRepository.findByNumCadeira((cadeira));
 
         if (cadeiraEstaOcupada) {
@@ -171,11 +189,15 @@ public class SalaServices {
             System.out.println("O valor da sua ingresso é R$20,00");
             valor = VALOR_INGRESSO_INTEIRA;
         }
+
         int ingressoId = cliente.getCpf().hashCode();
+        
         ingressoId = Math.abs(ingressoId);
+        
         System.out.println("HASH: " + ingressoId);
+        
         boolean successCreateIngresso = this.salasRepository.comprarIngresso(
-                new Ingresso(/*Integer.parseInt*/(ingressoId), cliente, sala, valor), cadeira);
+                new Ingresso((ingressoId), cliente, sala, valor), cadeira);
 
         if (successCreateIngresso) {
             System.out.println("Ingresso reservado com sucesso!");
@@ -184,6 +206,48 @@ public class SalaServices {
         }
     }
 
+    /**
+     * O método a seguir faz a impressão da matriz de poltronas disponíveis
+     * e ocupadas. O método recebe uma matriz de 80 assentos numeradas pelo método criaMatriz().
+     * @see #criaMatriz()
+     * @param assentosOcup - uma lista de inteiro contendo o número dos assentos ocupados
+     *
+     * O método percorre a lista de assentos caso ela não seja nula observado as cadeiras
+     * para que seja marcado um "x" na cadeira que esteja ocupada dentro da matriz.
+     * Temos 3 casos a ser analisado: quando o assento é menor que 10, quando é igual a 10
+     * e quando é maior que 10.
+     *
+     * Primeiro é preciso analisar que na matriz a coluna 1 contém números que terminam com 1,
+     * a coluna 2 contém os números que terminam com 2 e assim por diante até a coluna 10 que contém
+     * os números que terminam com 0.
+     *
+     * 1º caso: Assentos menores que 10. Cada assento vai ficar na sua coluna, ou seja, o assento 1
+     * na coluna 1, assento 2 na coluna 2 até o assento 9 e coluna 9, todos na primeira linha da 
+     * matriz. Para fazer o acesso dessa posição na matriz calculo o resto da divisão por 10
+     * que seria o próprio assento com a linha 1 fixa e acesso a posição setando um "x" nela,
+     * indicando que está ocupada.
+     *
+     * 2º caso: Assentos divisíveis por 10. Assentos assim já foi visto que ficarão na última coluna,
+     * a décima. Para isso, é preciso quebrar o número em dois pois o primeiro algarismo corresponde
+     * a linha que ele se encontra, por exemplo, o assento 10 tá na linha 1, assento 20 na linha 2 até o assento 80,
+     * para isso basta fazer uma divisão inteira por 10 e o primeiro algarismo é coletado.
+     * Agora basta acessar a posição na matriz com a coluna fixa em 10 e marcar o "x" no assento.
+     *
+     * 3º caso: Assento maiores que 10 e não divisíveis por 10. Esse é o caso mais especial, mas tem
+     * a lógica parecida com os anteriores. Nesse caso temos números do 11 ao 79 salvo os divisíveis
+     * por 10. Novamente quebrando o número em 2, temos o primeiro algarismo representando a linha
+     * e o segundo representando a coluna. Porém, o primeiro algarismo não representa de fato a linha
+     * em que o assento se encontra devido a configuração da nossa matriz (@see #criaMatriz()), ao invés
+     * disso, representa uma linha anterior, por isso precisamos pegar a próxima. Pois o número 11 não 
+     * está na linha 1, mas sim na 2, assim como o 79 não está na linha 7 e sim na linha 8.
+     * A linha é calculada com uma divisão inteira por 10 e a coluna é calculada pelo resto da divisão
+     * por 10. Para acessar a posição basta fazer: cadeiras[linha+1][coluna] que já pega a linha correta
+     * de acordo com a explicação acima. Acessando a posição, basta marcar como ocupada.
+     *
+     * Para a impressão, é utilizado 2 for's, a posição que contém "x" está ocupada então imprime o
+     * caractere em vermelho, a posição que não contém "x" imprime o número da poltrona em verde,
+     * significando que está livre para ser escolhida.
+     */
     public void printSala(List<Integer> assentosOcup) {
         String[][] cadeiras = criaMatriz();
 
@@ -211,12 +275,18 @@ public class SalaServices {
             for (int j = 0; j < cadeiras[i].length; j++) {
                 if ((j > 0 && i > 0)) {
                     if (cadeiras[i][j].equals("x")) {
+                        //\033[31m - cor vermelha
+                        //\033[0m - fim do código ANSI
                         System.out.print(" \033[31m" + cadeiras[i][j] + "\033[0m ");
                     } else {
+                        //Se for menor que 10, para imprimir um espaço antes
                         if ((Integer.parseInt(cadeiras[i][j]) < 10))
                             if (i > 0 && j > 0)
+                                //\033[31m - cor verde
+                                //\033[0m - fim do código ANSI
                                 System.out.print(" \033[32m" + cadeiras[i][j] + "\033[0m ");
                             else
+                                //Imprimindo um espaço antes para alinhar
                                 System.out.print(" " + cadeiras[i][j] + " ");
                         else {
                             System.out.print("\033[32m" + cadeiras[i][j] + "\033[0m ");
@@ -232,6 +302,15 @@ public class SalaServices {
         }
     }
 
+    /**
+     * Cria uma matriz de 9 linhas e 11 colunas, onde 1 linha serve para ser
+     * o guia de número de cada coluna e 1 uma coluna o guia de cada linha.
+     * Além disso, a posição [0][0] é um espaço em branco para fica alinhado.
+     * Portanto, a cadeiras correspondem apenas a partir da linha 1 e coluna 1,
+     * pois a coluna 0 e linha 0 são os guias.
+     * 
+     * A variável aux é usada para setar a posição das poltrona de 1 até 80
+     */
     private String[][] criaMatriz() {
         String[][] cadeiras = new String[9][11];
         int aux = 1;
@@ -250,10 +329,22 @@ public class SalaServices {
         }
         return cadeiras;
     }
-
+    
+    /**
+     * Método de serviço responsável por realizar as operações necessárias para inserir
+     * um filme em uma sala
+     * 
+     * @see repository.IFilmeRepository#getAllFilmes()
+     * @see repository.IFilmeRepository#findByCodigo(int)
+     * @see repository.ISalaRepository#findById(int)
+     * @see repository.ISalaRepository#updateSala(Sala)
+     * 
+     * @throws SalaServicesException
+     *  - Exceção no caso de inserir um id de um filme inexistente.
+     *  - Exceção no caso de inserir um id de uma sala inexistente.
+     */
     public void adicionaFilmeNaSala() throws SalaServicesException {
-        // Teste
-        getAllSalas();
+        this.getAllSalas();
         System.out.print("Digite o id da sala: ");
         String salaId = sc.nextLine();
         List<Filme> filmes = this.filmesRepository.getAllFilmes();
@@ -288,6 +379,11 @@ public class SalaServices {
         }
     }
 
+    /**
+     * Método de serviço responsável pela listagem de salas cadastradas
+     * 
+     * @see repository.ISalaRepository#getAllSalas()
+     */
     public void getAllSalas() {
         List<Sala> salas = this.salasRepository.getAllSalas();
 
@@ -299,7 +395,13 @@ public class SalaServices {
         }
 
     }
-
+    
+    /**
+     * Método de serviço responsável pela remoção de salas cadastrada
+     * 
+     * @see repository.ISalaRepository#getAllSalas()
+     * @see repository.ISalaRepository#removeSala(int)
+     */
     public void removeSala() {
 
         List<Sala> salas = this.salasRepository.getAllSalas();

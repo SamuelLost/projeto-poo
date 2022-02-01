@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes","url":"allclasses-index.html"},{"p":"models","l":"Cinema"},{"p":"models","l":"Cliente"},{"p":"models","l":"Estudante"},{"p":"models","l":"Filme"},{"p":"models","l":"Ingresso"},{"p":"models","l":"Pessoa"},{"p":"models","l":"Sala"}]

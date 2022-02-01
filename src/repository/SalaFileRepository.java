@@ -1,3 +1,8 @@
+/**
+ * Declaração da classe SalaFileRepository que implementa a interface ISalaRepository 
+ * responsável por definir quais operações poderão ser realizadas. 
+ */
+
 package repository;
 
 import java.io.BufferedReader;
@@ -15,18 +20,31 @@ import java.util.Locale;
 import models.Filme;
 import models.Ingresso;
 import models.Sala;
-
+/**
+ * Classe responsável por realizar a persistência dos dados no arquivo
+ * seguindo as operações da interface.
+ */
 public class SalaFileRepository implements ISalaRepository {
 
+    // Constante para os caminhos dos arquivos
     public static final String FILENAME = "src/database/salas.txt";
     public static final String FILENAME_INGRESSO = "src/database/ingresso.txt";
 
+    // Repositório de filmes
     IFilmeRepository filmeRepository = new FilmeFileRepository();
     FilmeFileRepository filmesRepository = new FilmeFileRepository();
 
+    // Repositório de clientes
     IClienteRepository clienteRepository = new ClienteFileRepository();
     ClienteFileRepository clientesRepository = new ClienteFileRepository();
     
+    /**
+     * Método que insere uma instância de Sala no arquivo salas.txt
+     * 
+     * @param sala Sala a ser adicionado no arquivo.
+     * @return Retorna <code>True</code> caso deu tudo certo inserir no arquivo
+     *         e <code>False</code> caso contrário.
+     */
     @Override
     public boolean addSala(Sala sala) {
         try(
@@ -49,6 +67,11 @@ public class SalaFileRepository implements ISalaRepository {
         
     }
 
+    /**
+     * Método que busca todos os registros no arquivo salas.txt
+     * 
+     * @return Retorna uma <code>List<Sala></code> ou null.
+     */
     @Override
     public List<Sala> getAllSalas() {
         try (BufferedReader br = new BufferedReader(new FileReader(FILENAME))) {
@@ -81,6 +104,13 @@ public class SalaFileRepository implements ISalaRepository {
         }
     }
 
+    /**
+     * Método atualiza as informações de uma sala no arquivo salas.txt
+     * 
+     * @param sala Uma instância de Sala com as novas informações.
+     * @return Retorna <code>True</code> caso deu tudo certo atualizar no arquivo
+     *         e <code>False</code> caso contrário.
+     */
     @Override
     public boolean updateSala(Sala sala) {
 
@@ -93,6 +123,13 @@ public class SalaFileRepository implements ISalaRepository {
         return false;
     }
 
+    /**
+     * Método que remove uma sala do arquivo salas.txt
+     * 
+     * @param id id da sala que deseja remover do arquivo
+     * @return Retorna <code>True</code> caso deu tudo certo remover do arquivo
+     *         e <code>False</code> caso contrário.
+     */
     @Override
     public boolean removeSala(int id) {
         try (BufferedReader br = new BufferedReader(new FileReader(FILENAME))) {
@@ -138,6 +175,13 @@ public class SalaFileRepository implements ISalaRepository {
         }
     }
 
+    /**
+     * Método que realiza uma busca de uma sala pelo id no arquivo salas.txt
+     * 
+     * @param id id da sala que deseja buscar no arquivo
+     * @return Retorna uma instância de <code>Sala</code> caso deu tudo certo fazer
+     *         a busca no arquivo e <code>null</code> caso contrário.
+     */
     @Override
     public Sala findById(int id) {
         try (BufferedReader br = new BufferedReader(new FileReader(FILENAME))) {
@@ -172,6 +216,14 @@ public class SalaFileRepository implements ISalaRepository {
         }
     }
 
+    /**
+     * Método responsável pela compra de ingressos no cinema
+     * 
+     * @param ingresso uma instância de Ingresso
+     * @param numCadeira cadeira que o cliente deseja reservar
+     * @return Retorna <code>True</code> caso deu tudo certo a compra do ingresso 
+     *         e salvar no arquivo e <code>False</code> caso contrário.
+     */
     @Override
     public Boolean comprarIngresso(Ingresso ingresso, int numCadeira) {
 
@@ -190,6 +242,13 @@ public class SalaFileRepository implements ISalaRepository {
         }
     }
 
+    /**
+     * Método que verifica se essa cadeira já está presente no arquivo ingressos.txt
+     * 
+     * @param numCadeira número da cadeira que deseja verificar
+     * @return Retorna <code>True</code> caso deu tudo certo a verificação
+     *         e <code>False</code> caso contrário.
+     */
     @Override
     public Boolean findByNumCadeira(int numCadeira) {
         try (BufferedReader br = new BufferedReader(new FileReader(FILENAME_INGRESSO))) {
@@ -216,6 +275,13 @@ public class SalaFileRepository implements ISalaRepository {
         }
     }
 
+    /**
+     * Método que realiza uma busca de todas as cadeiras ocupadas em uma determinada sala
+     * 
+     * @param salaId id da sala que deseja verifica a disponibilidade
+     * @return Retorna <code>List<Integer></code> caso tenha cadeiras ocupadas
+     *         e <code>null</code> caso contrário.
+     */
     @Override
     public List<Integer> getAllCadeirasOcupadas(int salaId){
 

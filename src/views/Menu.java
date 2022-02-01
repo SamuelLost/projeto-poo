@@ -1,6 +1,10 @@
 package views;
-
+//Classe criada para conter apenas os métodos que imprimem os menus
 public class Menu {
+
+    /**
+     * Método estático que realiza a impressão do menu administrativo
+     */
     public static void menuAdmin() {
         System.out.println("======================ADMINISTRATIVO======================");
         System.out.println("1 - Cadastrar Sala");
@@ -14,6 +18,9 @@ public class Menu {
         System.out.println("0 - Sair");
     }
 
+    /**
+     * Método estático que realiza a impressão do menu administrativo
+     */
     public static void menuCliente() {
         System.out.println("==========================================================");
         System.out.println("1 - Realizar Cadastro");

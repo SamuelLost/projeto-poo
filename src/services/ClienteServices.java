@@ -9,7 +9,9 @@ import models.Estudante;
 import repository.IClienteRepository;
 import repository.IEstudanteRepository;
 import utils.Console;
-
+/**
+ * Classe de serviços relacionados a entidade de cliente
+ */
 public class ClienteServices {
 
     Scanner sc = new Scanner(System.in);
@@ -17,6 +19,11 @@ public class ClienteServices {
     IClienteRepository clientesRepository;
     IEstudanteRepository estudantesRepository;
 
+    /**
+     * Construtor ClienteServices
+     * @param clientesRepository repositório de clientes
+     * @param estudantesRepository repositório de estudantes
+     */
     public ClienteServices(
             IClienteRepository clientesRepository,
             IEstudanteRepository estudantesRepository) {
@@ -24,6 +31,17 @@ public class ClienteServices {
         this.estudantesRepository = estudantesRepository;
     }
 
+    /**
+     * Método de serviço que obtém os dados do usuário e repassa para o repositório
+     * 
+     * @see repository.IClienteRepository#findByCpf(String)
+     * @see repository.IClienteRepository#addCliente(Cliente)
+     * @see repository.IEstudanteRepository#findAllSiglas()
+     * @see repository.IEstudanteRepository#addEstudante(Estudante)
+     * 
+     * @throws ClienteServicesException Exceção no caso de tentar adicionar 
+     * um cliente com um CPF já existente na base de dados.
+     */
     public void addCliente() throws ClienteServicesException {
         String cpf = "";
         do {
@@ -87,7 +105,12 @@ public class ClienteServices {
         }
 
     }
-
+    
+    /**
+     * Método de serviço responsável por obter todos os clientes do repositório
+     * 
+     * @see repository.IClienteRepository#getAllClientes()
+     */
     public void getAllClientes() {
         List<Cliente> clientes = clientesRepository.getAllClientes();
         // clientes.sort(null);
@@ -96,6 +119,12 @@ public class ClienteServices {
         }
     }
 
+    /**
+     * Método de serviço responsável por chamar a operação de remoção no repositório
+     * passando o cpf do cliente a ser removido.
+     * 
+     * @see repository.IClienteRepository#removeCliente(String)
+     */
     public void removeCliente() {
         this.getAllClientes();
         System.out.print("\nDigite o CPF do cliente que deseja remover: ");
@@ -110,6 +139,16 @@ public class ClienteServices {
         }
     }
 
+    /**
+     * Método de serviço para atualização das informações de um cliente
+     * 
+     * @see #getAllClientes()
+     * @see repository.IClienteRepository#findByCpf(String)
+     * @see repository.IClienteRepository#updateCliente(Cliente)
+     * 
+     * 
+     * @throws ClienteServicesException Exceção no caso de atualizar um cliente com o CPF inexistente.
+     */
     public void updateCliente() throws ClienteServicesException {
         Cliente cliente = null;
         boolean updatedSuccessCliente = false;
@@ -126,7 +165,6 @@ public class ClienteServices {
         }
         
         Console.clear();
-        if(cliente instanceof Estudante) System.out.println("Uiiii");
         System.out.println("Qual informação deseja alterar?");
         System.out.println("1 - Nome do cliente");
         System.out.println("2 - Idade do cliente");
@@ -155,7 +193,6 @@ public class ClienteServices {
                 this.statusUpdatedCliente(updatedSuccessCliente, "CPF");
                 break;
             case 4: {
-                // Olhar isso aqui
                 Estudante a = (Estudante) cliente;
                 a.setMatricula(valueOp);
                 updatedSuccessCliente = this.clientesRepository.updateCliente(a);
@@ -163,7 +200,6 @@ public class ClienteServices {
                 break;
             }
             case 5: {
-                // Olhar isso aqui
                 Estudante a = (Estudante) cliente;
                 a.setSiglaFaculdade(valueOp.toUpperCase());
                 updatedSuccessCliente = this.clientesRepository.updateCliente(a);
@@ -175,6 +211,15 @@ public class ClienteServices {
         }
     }
 
+    /**
+     * Método utilizado para imprimir uma mensagem de sucesso ou fala de acordo com 
+     * a informação que foi atualizada do cliente
+     * 
+     * @param updatedSuccessCliente Será <code>True</code> se a atualização foi concluída com sucesso
+     * e caso contrário será <code>False</code>
+     * @param field O campo que foi atualizado
+     * @return Retorna uma mensagem de sucesso ou falha formatada
+     */
     private String statusUpdatedCliente(Boolean updatedSuccessCliente, String field) {
         if (updatedSuccessCliente) {
             return "O campo " + field + " foi atualizado com sucesso!";
@@ -183,6 +228,12 @@ public class ClienteServices {
         }
     }
 
+    /**
+     * Método que realiza o mapeamento da opção escolhida pelo usuário
+     * relacionado ao compo que será atualizado
+     * @param op Opção escolhida pelo usuário
+     * @return Retorna uma mensagem
+     */
     private String mapUpdatedClienteMessage(int op) {
         if (op == 1) {
             return "Digite o novo nome do cliente: ";

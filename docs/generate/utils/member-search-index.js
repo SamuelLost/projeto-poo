@@ -1,0 +1,1 @@
+memberSearchIndex = [{"p":"utils","c":"Console","l":"clear()"},{"p":"utils","c":"Console","l":"Console()","url":"%3Cinit%3E()"}]

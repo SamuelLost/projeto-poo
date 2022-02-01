@@ -1,3 +1,8 @@
+/**
+ * Declaração da classe ClienteFileRepository que implementa a interface IClienteRepository 
+ * responsável por definir quais operações poderão ser realizadas. 
+ */
+
 package repository;
 
 import java.io.BufferedReader;
@@ -14,18 +19,32 @@ import java.util.List;
 import models.Cliente;
 import models.Estudante;
 
+/**
+ * Classe responsável por realizar a persistência dos dados no arquivo
+ * seguindo as operações da interface.
+ */
 public class ClienteFileRepository implements IClienteRepository {
 
+    // Constante para o caminho do arquivo
     public static final String FILENAME = "src/database/clientes.txt";
 
+    /**
+     * Método que insere uma instância de cliente ou estudante no arquivo
+     * clientes.txt
+     * 
+     * @param cliente Cliente a ser adicionado no arquivo.
+     * @return Retorna <code>True</code> caso deu tudo certo inserir no arquivo
+     *         e <code>False</code> caso contrário.
+     */
     @Override
     public boolean addCliente(Cliente cliente) {
         try (
                 FileWriter filmeFile = new FileWriter(FILENAME, true);
                 PrintWriter filmeWriter = new PrintWriter(filmeFile);) {
-            if(cliente instanceof Estudante) {
+            if (cliente instanceof Estudante) {
                 Estudante a = (Estudante) cliente;
-                String linha = String.format("%s,%s,%d,%s,%s", cliente.getNome(), cliente.getCpf(), cliente.getIdade(), a.getMatricula(), a.getSiglaFaculdade());
+                String linha = String.format("%s,%s,%d,%s,%s", cliente.getNome(), cliente.getCpf(), cliente.getIdade(),
+                        a.getMatricula(), a.getSiglaFaculdade());
                 filmeWriter.println(linha);
                 return true;
             } else {
@@ -40,6 +59,11 @@ public class ClienteFileRepository implements IClienteRepository {
 
     }
 
+    /**
+     * Método que busca todos os registros no arquivo clientes.txt
+     * 
+     * @return Retorna uma <code>List<Cliente></code> ou null.
+     */
     @Override
     public List<Cliente> getAllClientes() {
         try (BufferedReader br = new BufferedReader(new FileReader(FILENAME))) {
@@ -75,6 +99,13 @@ public class ClienteFileRepository implements IClienteRepository {
         }
     }
 
+    /**
+     * Método atualiza as informações de cliente no arquivo clientes.txt
+     * 
+     * @param cliente Uma instância de Cliente com as novas informações.
+     * @return Retorna <code>True</code> caso deu tudo certo atualizar no arquivo
+     *         e <code>False</code> caso contrário.
+     */
     @Override
     public boolean updateCliente(Cliente cliente) {
         boolean removedFilme = this.removeCliente(cliente.getCpf());
@@ -87,9 +118,15 @@ public class ClienteFileRepository implements IClienteRepository {
         return false;
     }
 
+    /**
+     * Método que remove um cliente do arquivo clientes.txt
+     * 
+     * @param cpf Cpf do cliente que deseja remover do arquivo
+     * @return Retorna <code>True</code> caso deu tudo certo remover do arquivo
+     *         e <code>False</code> caso contrário.
+     */
     @Override
     public boolean removeCliente(String cpf) {
-        // TODO Auto-generated method stub
         try (BufferedReader br = new BufferedReader(new FileReader(FILENAME))) {
             List<Cliente> clientes = new ArrayList<>();
             String line = br.readLine();
@@ -138,6 +175,13 @@ public class ClienteFileRepository implements IClienteRepository {
         }
     }
 
+    /**
+     * Método que realiza uma busca de um cliente pelo CPF no arquivo clientes.txt
+     * 
+     * @param cpf Cpf do cliente que deseja buscar no arquivo
+     * @return Retorna uma instância de <code>Cliente</code> caso deu tudo certo fazer
+     *         a busca no arquivo e <code>null</code> caso contrário.
+     */
     @Override
     public Cliente findByCpf(String cpf) {
         try (BufferedReader br = new BufferedReader(new FileReader(FILENAME))) {

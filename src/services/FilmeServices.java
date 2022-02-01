@@ -8,18 +8,31 @@ import exceptions.FilmeServicesException;
 import models.Filme;
 import repository.IFilmeRepository;
 import utils.Console;
-
+/**
+ * Classe de serviços relacionados a entidade de filme
+ */
 public class FilmeServices {
 
     Scanner sc = new Scanner(System.in);
     
     private IFilmeRepository filmesRepository;
-    
+
+    /**
+     * Construtor FilmeServices
+     * @param filmesRepository repositório de filmes
+     */
     public FilmeServices(IFilmeRepository filmesRepository) {
         this.filmesRepository = filmesRepository;
     }   
 
-    public boolean addFilme() throws InputMismatchException {
+    /**
+     * Método de serviço para adicionar um filme
+     * 
+     * @see repository.IFilmeRepository#addFilme(Filme)
+     * 
+     * @throws InputMismatchException Exceção no caso de o usuário entrar com um valor que não estamos esperado
+     */
+    public void addFilme() throws InputMismatchException {
         System.out.print("Código: ");
         String codigo_filme = sc.nextLine();
         System.out.print("Nome do Filme: ");
@@ -36,12 +49,23 @@ public class FilmeServices {
         String sinopse = sc.nextLine();
         System.out.print("Duração do filme: ");
         int duracao = sc.nextInt();
-        this.filmesRepository.addFilme(
+
+        boolean createdSuccessFilme = this.filmesRepository.addFilme(
                 new Filme(Integer.parseInt(codigo_filme), nome, genero, Integer.parseInt(minIdade) ,modalidade, idioma, sinopse, duracao));
-        System.out.println("Filme inserido com sucesso!");
-        return true;
+        
+        if(createdSuccessFilme){
+            System.out.println("Filme inserido com sucesso!");
+        }else {
+            System.out.println("Não foi possível inserir o filme!");
+        }
+        
     }
 
+    /**
+     * Método de serviço que obtém do repositório todos os filmes cadastrados
+     * 
+     * @see repository.IFilmeRepository#getAllFilmes()
+     */
     public void getAllFilmes() {
         List<Filme> filmes = this.filmesRepository.getAllFilmes();
         
@@ -57,6 +81,11 @@ public class FilmeServices {
         }
     }
 
+    /**
+     * Método de serviço que chama o repositório para excluir o filme da base de dados
+     * 
+     * @see repository.IFilmeRepository#removeFilme(int)
+     */
     public void removeFilme() {
         getAllFilmes();
         System.out.print("Digite o código do filme: ");
@@ -71,6 +100,14 @@ public class FilmeServices {
         }
     }
 
+    /**
+     * Método de serviço para atualização das informações de um filme
+     * 
+     * @see repository.IFilmeRepository#findByCodigo(int)
+     * @see repository.IFilmeRepository#updateFilme(Filme)
+     * 
+     * @throws FilmeServicesException Exceção no caso de atualizar um filme com um código inexistente.
+     */
     public void updateFilme() throws FilmeServicesException{
 
         Filme filme = null;
@@ -143,6 +180,15 @@ public class FilmeServices {
         }
     }
 
+    /**
+     * Método utilizado para imprimir uma mensagem de sucesso ou fala de acordo com 
+     * a informação que foi atualizada do filme
+     * 
+     * @param updatedSuccessFilme Será <code>True</code> se a atualização foi concluída com sucesso
+     * e caso contrário será <code>False</code>
+     * @param field O campo que foi atualizado
+     * @return Retorna uma mensagem de sucesso ou falha formatada
+     */
     private String statusUpdatedFilme(Boolean updatedSuccessFilme, String field){
         if(updatedSuccessFilme){
             return "O campo " + field + " foi atualizado com sucesso!";
@@ -151,6 +197,12 @@ public class FilmeServices {
         }
     }
 
+    /**
+     * Método que realiza o mapeamento da opção escolhida pelo usuário
+     * relacionado ao compo que será atualizado
+     * @param op Opção escolhida pelo usuário
+     * @return Retorna uma mensagem
+     */
     private String mapUpdatedFilmeMessage(int op){
         if(op == 1){
             return "Digite o novo nome do filme: ";
