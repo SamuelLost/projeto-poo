@@ -64,7 +64,7 @@ Professor: Atílio Gomes Luiz
 ## TODO
  - [x] Corrigir menu
  - [] Verificar index digitado
- - [] Gerar id aleatório para o ingresso
+ - [x] Gerar id aleatório para o ingresso
  - [x] Criar exception para regras de negócio da aplicação
  - [x] Criar exception geral
  - [x] While na listagem (apenas salas que não tem filme) de salas antes de inserir um filme na mesma.
