@@ -209,7 +209,7 @@ public class SalaFileRepository implements ISalaRepository {
 
             return false;
         }catch (FileNotFoundException e) {
-            return null;
+            return false;
         } catch (IOException e) {
             System.out.println(e.getMessage());
             return null;

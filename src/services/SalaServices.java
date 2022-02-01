@@ -75,8 +75,8 @@ public class SalaServices {
     }
 
     public void comprarIngresso() throws SalaServicesException {
-        System.out.print("Digite o id do ingresso: ");
-        String ingressoId = sc.nextLine();
+        // System.out.print("Digite o id do ingresso: ");
+        // String ingressoId = sc.nextLine();
 
         List<Sala> salas = this.salasRepository.getAllSalas();
         // List<Sala> salas = cinema.getSalas();
@@ -171,9 +171,11 @@ public class SalaServices {
             System.out.println("O valor da sua ingresso é R$20,00");
             valor = VALOR_INGRESSO_INTEIRA;
         }
-
+        int ingressoId = cliente.getCpf().hashCode();
+        ingressoId = Math.abs(ingressoId);
+        System.out.println("HASH: " + ingressoId);
         boolean successCreateIngresso = this.salasRepository.comprarIngresso(
-                new Ingresso(Integer.parseInt(ingressoId), cliente, sala, valor), cadeira);
+                new Ingresso(/*Integer.parseInt*/(ingressoId), cliente, sala, valor), cadeira);
 
         if (successCreateIngresso) {
             System.out.println("Ingresso reservado com sucesso!");
@@ -251,6 +253,7 @@ public class SalaServices {
 
     public void adicionaFilmeNaSala() throws SalaServicesException {
         // Teste
+        getAllSalas();
         System.out.print("Digite o id da sala: ");
         String salaId = sc.nextLine();
         List<Filme> filmes = this.filmesRepository.getAllFilmes();

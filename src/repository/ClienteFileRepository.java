@@ -12,17 +12,17 @@ import java.util.Collections;
 import java.util.List;
 
 import models.Cliente;
+import models.Estudante;
 
-public class ClienteFileRepository implements IClienteRepository{
+public class ClienteFileRepository implements IClienteRepository {
 
     public static final String FILENAME = "src/database/clientes.txt";
 
     @Override
     public boolean addCliente(Cliente cliente) {
-        try(
-            FileWriter filmeFile = new FileWriter(FILENAME, true);
-            PrintWriter filmeWriter = new PrintWriter(filmeFile);
-        ) {
+        try (
+                FileWriter filmeFile = new FileWriter(FILENAME, true);
+                PrintWriter filmeWriter = new PrintWriter(filmeFile);) {
             String linha = String.format("%s,%s,%d", cliente.getNome(), cliente.getCpf(), cliente.getIdade());
             filmeWriter.println(linha);
             return true;
@@ -30,7 +30,7 @@ public class ClienteFileRepository implements IClienteRepository{
             System.out.println(e.getMessage());
             return false;
         }
-        
+
     }
 
     @Override
@@ -41,16 +41,26 @@ public class ClienteFileRepository implements IClienteRepository{
 
             while (line != null) {
                 String[] dados = line.split(",");
-                String nome = dados[0];
-                String cpf = dados[1];
-                short idade = Short.parseShort(dados[2]);
+                if (dados.length == 5) {
+                    String nome = dados[0];
+                    String cpf = dados[1];
+                    short idade = Short.parseShort(dados[2]);
+                    String matricula = dados[3];
+                    String sigla = dados[4];
 
-                clientes.add(new Cliente(nome, cpf, idade));
+                    clientes.add(new Estudante(nome, cpf, idade, matricula, sigla));
+                } else {
+                    String nome = dados[0];
+                    String cpf = dados[1];
+                    short idade = Short.parseShort(dados[2]);
+
+                    clientes.add(new Cliente(nome, cpf, idade));
+                }
                 line = br.readLine();
             }
             Collections.sort(clientes);
             return clientes;
-        }catch (FileNotFoundException e) {
+        } catch (FileNotFoundException e) {
             return null;
         } catch (IOException e) {
             System.out.println(e.getMessage());
@@ -61,8 +71,8 @@ public class ClienteFileRepository implements IClienteRepository{
     @Override
     public boolean updateCliente(Cliente cliente) {
         boolean removedFilme = this.removeCliente(cliente.getCpf());
-        
-        if(removedFilme){
+
+        if (removedFilme) {
             this.addCliente(cliente);
             System.out.println("Cliente atualizado com sucesso!");
             return true;
@@ -82,10 +92,10 @@ public class ClienteFileRepository implements IClienteRepository{
                 String nome = dados[0];
                 String cpfAux = dados[1];
                 String idade = dados[2];
-                if(!cpfAux.equals(cpf)) {
+                if (!cpfAux.equals(cpf)) {
                     clientes.add(new Cliente(nome, cpfAux, Short.parseShort(idade)));
                 }
-                
+
                 line = br.readLine();
             }
 
@@ -93,16 +103,16 @@ public class ClienteFileRepository implements IClienteRepository{
 
             Boolean deletedFile = file.delete();
 
-            if(deletedFile){
-                for(Cliente cliente: clientes){
+            if (deletedFile) {
+                for (Cliente cliente : clientes) {
                     this.addCliente(cliente);
                 }
-            }else {
+            } else {
                 System.out.println("Não foi possível deletar o filme");
             }
             return true;
 
-        }catch (FileNotFoundException e) {
+        } catch (FileNotFoundException e) {
             return false;
         } catch (IOException e) {
             System.out.println(e.getMessage());
@@ -120,23 +130,27 @@ public class ClienteFileRepository implements IClienteRepository{
 
                 String cpfCliente = dados[1];
 
-                if(cpf.equals(cpfCliente)){
+                if (cpf.equals(cpfCliente)) {
                     String nome = dados[0];
                     String idade = dados[2];
-
-                    return new Cliente(nome, cpfCliente, Short.parseShort(idade));
+                    if(dados.length < 5) return new Cliente(nome, cpfCliente, Short.parseShort(idade));
+                    else {
+                        String matricula = dados[3];
+                        String siglaFaculdade = dados[4];
+                        return new Estudante(nome, cpf, Short.parseShort(idade), matricula, siglaFaculdade);
+                    }
                 }
 
                 line = br.readLine();
             }
 
             return null;
-        }catch (FileNotFoundException e) {
+        } catch (FileNotFoundException e) {
             return null;
-        }catch (IOException e) {
+        } catch (IOException e) {
             System.out.println(e.getMessage());
             return null;
-        } 
+        }
     }
-    
+
 }

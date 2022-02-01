@@ -4,6 +4,7 @@ import exceptions.ClienteServicesException;
 import exceptions.FilmeServicesException;
 import exceptions.SalaServicesException;
 import models.Cinema;
+import repository.AdmValidation;
 import repository.ClienteFileRepository;
 import repository.EstudanteFileRepository;
 import repository.FilmeFileRepository;
@@ -97,11 +98,11 @@ public class App {
                 break;
             case "8":
                 // Voltar ao menu principal
-                Menu.menuAdmin();
+                //Menu.menuAdmin();
                 // op = sc.nextShort();
-                break;
+                return op;
             case "0":
-                System.out.println("Saindo...");
+                System.out.println("Aplicação finalizada");
                 op = "exit";
                 return op;
             default:
@@ -121,7 +122,7 @@ public class App {
 
         Scanner sc = new Scanner(System.in);
         op = sc.nextLine();
-        
+
         Console.clear();
 
         switch (op) {
@@ -150,6 +151,10 @@ public class App {
                 op = "ListarFilme";
                 filmeServices.getAllFilmes();
                 break;
+            case "6":
+                // listar filme
+                // op = "voltar";
+                return op;
             case "0":
                 System.out.println("Aplicação finalizada");
                 op = "exit";
@@ -178,22 +183,22 @@ public class App {
         String result = "exit";
 
         do {
-            System.out.print(
-                    "==========================================================\n"
-                            + "Bem-vindo ao " + cinema.getNome() + ", localizado em " + cinema.getCidade() + "\n");
+            System.out.print(cinema);
             System.out.println("É administrador? (S/N)");
             Character ch = sc.nextLine().charAt(0);
 
             if (String.valueOf(ch).toLowerCase().equals("s")) {
                 System.out.print("Digite seu CPF: ");
                 String cpf = sc.nextLine();
-                if (cpf.equals("123")) {
+                if (AdmValidation.validation(cpf)) {
                     isAdmin = true;
+                } else {
+                    System.out.println("Você não é administrador");
                 }
             }
 
             Console.clear();
-            
+
             try {
                 if (isAdmin) {
                     Menu.menuAdmin();
@@ -204,12 +209,12 @@ public class App {
                 }
             } catch (SalaServicesException e) {
                 System.out.println(e.getMessage());
-            }catch (FilmeServicesException e) {
+            } catch (FilmeServicesException e) {
                 System.out.println(e.getMessage());
-            }catch (ClienteServicesException e) {
+            } catch (ClienteServicesException e) {
                 System.out.println(e.getMessage());
             }
-
+            isAdmin = false;
         } while (!result.equals("exit"));
 
     }

@@ -71,5 +71,7 @@ Professor: Atílio Gomes Luiz
  - [] Escrever comentários
  - [] Atualizar UML
  - [] Atualizar cadastro do cliente
+ - [] Atualizar informações de estudantes
  - [] verificar a idade da pessoa com a classificação indicativa do filme
  - [x] Adicionar exception FILENotFount
+ - [x] verificar o cpf

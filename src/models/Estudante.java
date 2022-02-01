@@ -16,7 +16,7 @@ public class Estudante extends Cliente {
 		return matricula;
 	}
 
-	private void setMatricula(String matricula) {
+	public void setMatricula(String matricula) {
 		this.matricula = matricula;
 	}
 
@@ -24,7 +24,7 @@ public class Estudante extends Cliente {
 		return siglaFaculdade;
 	}
 
-	private void setSiglaFaculdade(String siglaFaculdade) {
+	public void setSiglaFaculdade(String siglaFaculdade) {
 		this.siglaFaculdade = siglaFaculdade;
 	}
 
@@ -32,7 +32,7 @@ public class Estudante extends Cliente {
     public String toString() {
         String out = super.toString();
         out += "\nMatrícula: " + getMatricula() 
-            + "\n Faculdade: " + getSiglaFaculdade();
+            + "\nFaculdade: " + getSiglaFaculdade();
         return out;
     }
 }
