@@ -23,9 +23,16 @@ public class ClienteFileRepository implements IClienteRepository {
         try (
                 FileWriter filmeFile = new FileWriter(FILENAME, true);
                 PrintWriter filmeWriter = new PrintWriter(filmeFile);) {
-            String linha = String.format("%s,%s,%d", cliente.getNome(), cliente.getCpf(), cliente.getIdade());
-            filmeWriter.println(linha);
-            return true;
+            if(cliente instanceof Estudante) {
+                Estudante a = (Estudante) cliente;
+                String linha = String.format("%s,%s,%d,%s,%s", cliente.getNome(), cliente.getCpf(), cliente.getIdade(), a.getMatricula(), a.getSiglaFaculdade());
+                filmeWriter.println(linha);
+                return true;
+            } else {
+                String linha = String.format("%s,%s,%d", cliente.getNome(), cliente.getCpf(), cliente.getIdade());
+                filmeWriter.println(linha);
+                return true;
+            }
         } catch (IOException e) {
             System.out.println(e.getMessage());
             return false;
@@ -89,11 +96,22 @@ public class ClienteFileRepository implements IClienteRepository {
 
             while (line != null) {
                 String[] dados = line.split(",");
-                String nome = dados[0];
-                String cpfAux = dados[1];
-                String idade = dados[2];
-                if (!cpfAux.equals(cpf)) {
-                    clientes.add(new Cliente(nome, cpfAux, Short.parseShort(idade)));
+                if (dados.length < 5) {
+                    String nome = dados[0];
+                    String cpfAux = dados[1];
+                    String idade = dados[2];
+                    if (!cpfAux.equals(cpf)) {
+                        clientes.add(new Cliente(nome, cpfAux, Short.parseShort(idade)));
+                    }
+                } else {
+                    String nome = dados[0];
+                    String cpfAux = dados[1];
+                    String idade = dados[2];
+                    String matricula = dados[3];
+                    String sigla = dados[4];
+                    if (!cpfAux.equals(cpf)) {
+                        clientes.add(new Estudante(nome, cpfAux, Short.parseShort(idade), matricula, sigla));
+                    }
                 }
 
                 line = br.readLine();
@@ -133,7 +151,8 @@ public class ClienteFileRepository implements IClienteRepository {
                 if (cpf.equals(cpfCliente)) {
                     String nome = dados[0];
                     String idade = dados[2];
-                    if(dados.length < 5) return new Cliente(nome, cpfCliente, Short.parseShort(idade));
+                    if (dados.length < 5)
+                        return new Cliente(nome, cpfCliente, Short.parseShort(idade));
                     else {
                         String matricula = dados[3];
                         String siglaFaculdade = dados[4];

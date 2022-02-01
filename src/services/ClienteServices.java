@@ -154,19 +154,22 @@ public class ClienteServices {
                 updatedSuccessCliente = this.clientesRepository.updateCliente(cliente);
                 this.statusUpdatedCliente(updatedSuccessCliente, "CPF");
                 break;
-            case 4:
+            case 4: {
                 // Olhar isso aqui
-                // Estudante a = (Estudante) cliente;
-                // a.setMatricula(valueOp);
-                // updatedSuccessCliente = this.clientesRepository.updateCliente(a);
-                // this.statusUpdatedCliente(updatedSuccessCliente, "Idade");
+                Estudante a = (Estudante) cliente;
+                a.setMatricula(valueOp);
+                updatedSuccessCliente = this.clientesRepository.updateCliente(a);
+                this.statusUpdatedCliente(updatedSuccessCliente, "Matrícula");
                 break;
-            case 5:
+            }
+            case 5: {
                 // Olhar isso aqui
-                // cliente.setIdade(Short.parseShort(valueOp));
-                // updatedSuccessCliente = this.clientesRepository.updateCliente(cliente);
-                // this.statusUpdatedCliente(updatedSuccessCliente, "Idade");
+                Estudante a = (Estudante) cliente;
+                a.setSiglaFaculdade(valueOp.toUpperCase());
+                updatedSuccessCliente = this.clientesRepository.updateCliente(a);
+                this.statusUpdatedCliente(updatedSuccessCliente, "Sigla");
                 break;
+            }
             default:
                 break;
         }
