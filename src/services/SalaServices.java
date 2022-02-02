@@ -101,7 +101,6 @@ public class SalaServices {
      */
     public void comprarIngresso() throws SalaServicesException {
         List<Sala> salas = this.salasRepository.getAllSalas();
-        // List<Sala> salas = cinema.getSalas();
         System.out.println("==============================");
         for (Sala sala : salas) {
             if (sala.getFilme() != null) {
@@ -113,7 +112,6 @@ public class SalaServices {
         String salaId = sc.nextLine();
 
         Sala sala = this.salasRepository.findById(Integer.parseInt(salaId));
-        // Sala sala = salas.get(Integer.parseInt(salaId)-1);
 
         if (sala == null) {
             throw new SalaServicesException("Sala não encontrada!");
@@ -142,9 +140,6 @@ public class SalaServices {
             System.out.println("Pode escolher qualquer cadeira válida de 1 até " + sala.getCapacidade());
         }
 
-        // printSala(sala);
-
-        // Deve haver um while
         System.out.print("Digite o número da cadeira: ");
         int cadeira = sc.nextInt();
         sc.nextLine();
@@ -251,7 +246,6 @@ public class SalaServices {
     public void printSala(List<Integer> assentosOcup) {
         String[][] cadeiras = criaMatriz();
 
-        // int aux = 0;
         // Descobrindo a coluna e a linha para colocar o "x"
         if (assentosOcup != null) {
             for (int cadeira : assentosOcup) {

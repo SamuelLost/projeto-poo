@@ -20,29 +20,6 @@ public class Cliente extends Pessoa implements Comparable<Cliente> {
     // /**
     //  * GETTERS e SETTERS
     //  */
-    // public String getNome() {
-    //     return nome;
-    // }
-
-    // public void setNome(String nome) {
-    //     this.nome = nome;
-    // }
-
-    // public String getCpf() {
-    //     return cpf;
-    // }
-
-    // public void setCpf(String cpf) {
-    //     this.cpf = cpf;
-    // }
-
-    // public short getIdade() {
-    //     return idade;
-    // }
-
-    // public void setIdade(short idade) {
-    //     this.idade = idade;
-    // }
 
     /**
      * Imprimindo informações do cliente
