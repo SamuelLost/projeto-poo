@@ -19,8 +19,8 @@ import repository.ISalaRepository;
  */
 public class SalaServices {
 
-    public static final float VALOR_INGRESSO_MEIA = 10;
-    public static final float VALOR_INGRESSO_INTEIRA = 20;
+    private final float VALOR_INGRESSO_MEIA = 10;
+    private final float VALOR_INGRESSO_INTEIRA = 20;
 
     private ISalaRepository salasRepository;
     private IClienteRepository clientesRepository;

@@ -26,15 +26,17 @@ import views.Menu;
 
 public class App {
 
-    IFilmeRepository filmeRepository;
-    FilmeServices filmeServices;
-    ISalaRepository salaRepository;
+    private IFilmeRepository filmeRepository;
+    private FilmeServices filmeServices;
 
-    IEstudanteRepository estudanteRepository;
-    IClienteRepository clienteRepository;
-    ClienteServices clienteServices;
+    private ISalaRepository salaRepository;
+    private SalaServices salaServices;
 
-    SalaServices salaServices;
+    private IClienteRepository clienteRepository;
+    private ClienteServices clienteServices;
+    
+    private IEstudanteRepository estudanteRepository;
+
 
     public App() {
 

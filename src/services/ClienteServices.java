@@ -16,8 +16,8 @@ public class ClienteServices {
 
     Scanner sc = new Scanner(System.in);
 
-    IClienteRepository clientesRepository;
-    IEstudanteRepository estudantesRepository;
+    private IClienteRepository clientesRepository;
+    private IEstudanteRepository estudantesRepository;
 
     /**
      * Construtor ClienteServices
