@@ -121,10 +121,10 @@ public class Filme implements Comparable<Filme> {
      * Override do método compareTo() da interface Comparable.
      * Esse método é sobrescrito para que possa ser possível a ordenação
      * de objetos Filmes. A comparação e ordenação é feita a partir 
-     * de seus códigos usando o próprio compare() da classe <code>Integer</code>.
+     * de seus códigos usando o próprio compare() da classe <code>Integer<code>.
      *  
      * @param o - objeto filme
-     * @return um <code>integer</code> representando a comparação. 
+     * @return um <code>integer<code> representando a comparação. 
      * 0 - se for igual;
      * menor que 0 se o código do objeto for menor numericamente que a passada por argumento;
      * maior que 0 se o código do objeto for maior numericamente que a passada por argumento.

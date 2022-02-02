@@ -15,7 +15,7 @@ public interface IEstudanteRepository {
      * 
      * @param sigla Sigla que será utilizada na busca
      * @param cpf   CPF que será atrelado na busca
-     * @return Retorna uma instância de <code>Estudante</code> se encontrar no
+     * @return Retorna uma instância de <code>Estudante<code> se encontrar no
      *         arquivo e caso contrário,
      *         retorna <code>null<code>
      */
@@ -25,7 +25,7 @@ public interface IEstudanteRepository {
      * Método que realiza uma busca de todas as sigla de universidade que possuem
      * convênio com o cinema.
      * 
-     * @return Retorna uma <code>List<String></code> se encontrar no
+     * @return Retorna uma <code>List<String><code> se encontrar no
      *         arquivo e caso contrário,
      *         retorna <code>null<code>
      */
@@ -34,7 +34,7 @@ public interface IEstudanteRepository {
     /**
      * Método que insere um estudante no arquivo.
      * @param estudante Instância de Estudante que será inserida no arquivo
-     * @return Retorna uma <code>True<String></code> deu tudo certo adicionar no
+     * @return Retorna uma <code>True<String><code> deu tudo certo adicionar no
      *         arquivo e caso contrário,
      *         retorna <code>false<code>
      */

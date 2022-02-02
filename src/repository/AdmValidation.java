@@ -20,7 +20,7 @@ public class AdmValidation {
      * comparando com os registros no arquivo adms.txt
      * 
      * @param cpf Cpf que será utilizado na verificação se o usuário é um adm.
-     * @return Retorna <code>True</code> se é um adm e <code>False</code> caso
+     * @return Retorna <code>True<code> se é um adm e <code>False<code> caso
      *         contrário.
      */
     public static boolean validation(String cpf) {

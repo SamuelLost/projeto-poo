@@ -33,8 +33,8 @@ public class ClienteFileRepository implements IClienteRepository {
      * clientes.txt
      * 
      * @param cliente Cliente a ser adicionado no arquivo.
-     * @return Retorna <code>True</code> caso deu tudo certo inserir no arquivo
-     *         e <code>False</code> caso contrário.
+     * @return Retorna <code>True<code> caso deu tudo certo inserir no arquivo
+     *         e <code>False<code> caso contrário.
      */
     @Override
     public boolean addCliente(Cliente cliente) {
@@ -62,7 +62,7 @@ public class ClienteFileRepository implements IClienteRepository {
     /**
      * Método que busca todos os registros no arquivo clientes.txt
      * 
-     * @return Retorna uma <code>List<Cliente></code> ou null.
+     * @return Retorna uma <code>List<Cliente><code> ou null.
      */
     @Override
     public List<Cliente> getAllClientes() {
@@ -103,8 +103,8 @@ public class ClienteFileRepository implements IClienteRepository {
      * Método atualiza as informações de cliente no arquivo clientes.txt
      * 
      * @param cliente Uma instância de Cliente com as novas informações.
-     * @return Retorna <code>True</code> caso deu tudo certo atualizar no arquivo
-     *         e <code>False</code> caso contrário.
+     * @return Retorna <code>True<code> caso deu tudo certo atualizar no arquivo
+     *         e <code>False<code> caso contrário.
      */
     @Override
     public boolean updateCliente(Cliente cliente) {
@@ -122,8 +122,8 @@ public class ClienteFileRepository implements IClienteRepository {
      * Método que remove um cliente do arquivo clientes.txt
      * 
      * @param cpf Cpf do cliente que deseja remover do arquivo
-     * @return Retorna <code>True</code> caso deu tudo certo remover do arquivo
-     *         e <code>False</code> caso contrário.
+     * @return Retorna <code>True<code> caso deu tudo certo remover do arquivo
+     *         e <code>False<code> caso contrário.
      */
     @Override
     public boolean removeCliente(String cpf) {
@@ -179,8 +179,8 @@ public class ClienteFileRepository implements IClienteRepository {
      * Método que realiza uma busca de um cliente pelo CPF no arquivo clientes.txt
      * 
      * @param cpf Cpf do cliente que deseja buscar no arquivo
-     * @return Retorna uma instância de <code>Cliente</code> caso deu tudo certo fazer
-     *         a busca no arquivo e <code>null</code> caso contrário.
+     * @return Retorna uma instância de <code>Cliente<code> caso deu tudo certo fazer
+     *         a busca no arquivo e <code>null<code> caso contrário.
      */
     @Override
     public Cliente findByCpf(String cpf) {

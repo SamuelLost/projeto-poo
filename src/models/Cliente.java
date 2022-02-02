@@ -40,7 +40,7 @@ public class Cliente extends Pessoa implements Comparable<Cliente> {
      * de seus nomes usando o próprio compareTo() da classe String.
      *  
      * @param o - objeto cliente
-     * @return um <code>integer</code> representando a comparação. 
+     * @return um <code>integer<code> representando a comparação. 
      * 0 - se for igual;
      * menor que 0 se o nome do objeto for menor lexicograficamente que a passada por argumento;
      * maior que 0 se o nome do objeto for maior lexicograficamente que a passada por argumento.

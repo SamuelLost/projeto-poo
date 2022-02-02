@@ -64,18 +64,3 @@ Professor: Atílio Gomes Luiz
 ## 2.5 Mapeamento dos dados nos arquivos
 
 Pode ser visualizado no seguinte arquivo `docs/mapeamento-dados-arquivo.txt`
-
-## TODO
- - [x] Corrigir menu
- - [x] Verificar index digitado
- - [x] Gerar id aleatório para o ingresso
- - [x] Criar exception para regras de negócio da aplicação
- - [x] Criar exception geral
- - [x] While na listagem (apenas salas que não tem filme) de salas antes de inserir um filme na mesma.
- - [x] Escrever comentários
- - [] Atualizar UML
- - [x] Atualizar cadastro do cliente
- - [x] Atualizar informações de estudantes
- - [x] verificar a idade da pessoa com a classificação indicativa do filme
- - [x] Adicionar exception FILENotFount
- - [x] verificar o cpf

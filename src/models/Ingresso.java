@@ -59,10 +59,10 @@ public class Ingresso implements Comparable<Ingresso> {
      * Override do método compareTo() da interface Comparable.
      * Esse método é sobrescrito para que possa ser possível a ordenação
      * de objetos Ingresso. A comparação e ordenação é feita a partir 
-     * de seus códigos usando o próprio compare() da classe <code>Integer</code>.
+     * de seus códigos usando o próprio compare() da classe <code>Integer<code>.
      *  
      * @param o - objeto ingresso
-     * @return um <code>integer</code> representando a comparação. 
+     * @return um <code>integer<code> representando a comparação. 
      * 0 - se for igual;
      * menor que 0 se o código do objeto for menor numericamente que o do objeto passado por argumento;
      * maior que 0 se o código do objeto for maior numericamente que o do objeto passado por argumento.

@@ -42,8 +42,8 @@ public class SalaFileRepository implements ISalaRepository {
      * Método que insere uma instância de Sala no arquivo salas.txt
      * 
      * @param sala Sala a ser adicionado no arquivo.
-     * @return Retorna <code>True</code> caso deu tudo certo inserir no arquivo
-     *         e <code>False</code> caso contrário.
+     * @return Retorna <code>True<code> caso deu tudo certo inserir no arquivo
+     *         e <code>False<code> caso contrário.
      */
     @Override
     public boolean addSala(Sala sala) {
@@ -70,7 +70,7 @@ public class SalaFileRepository implements ISalaRepository {
     /**
      * Método que busca todos os registros no arquivo salas.txt
      * 
-     * @return Retorna uma <code>List<Sala></code> ou null.
+     * @return Retorna uma <code>List<Sala><code> ou null.
      */
     @Override
     public List<Sala> getAllSalas() {
@@ -108,8 +108,8 @@ public class SalaFileRepository implements ISalaRepository {
      * Método atualiza as informações de uma sala no arquivo salas.txt
      * 
      * @param sala Uma instância de Sala com as novas informações.
-     * @return Retorna <code>True</code> caso deu tudo certo atualizar no arquivo
-     *         e <code>False</code> caso contrário.
+     * @return Retorna <code>True<code> caso deu tudo certo atualizar no arquivo
+     *         e <code>False<code> caso contrário.
      */
     @Override
     public boolean updateSala(Sala sala) {
@@ -127,8 +127,8 @@ public class SalaFileRepository implements ISalaRepository {
      * Método que remove uma sala do arquivo salas.txt
      * 
      * @param id id da sala que deseja remover do arquivo
-     * @return Retorna <code>True</code> caso deu tudo certo remover do arquivo
-     *         e <code>False</code> caso contrário.
+     * @return Retorna <code>True<code> caso deu tudo certo remover do arquivo
+     *         e <code>False<code> caso contrário.
      */
     @Override
     public boolean removeSala(int id) {
@@ -179,8 +179,8 @@ public class SalaFileRepository implements ISalaRepository {
      * Método que realiza uma busca de uma sala pelo id no arquivo salas.txt
      * 
      * @param id id da sala que deseja buscar no arquivo
-     * @return Retorna uma instância de <code>Sala</code> caso deu tudo certo fazer
-     *         a busca no arquivo e <code>null</code> caso contrário.
+     * @return Retorna uma instância de <code>Sala<code> caso deu tudo certo fazer
+     *         a busca no arquivo e <code>null<code> caso contrário.
      */
     @Override
     public Sala findById(int id) {
@@ -193,7 +193,6 @@ public class SalaFileRepository implements ISalaRepository {
                 String salaId = dados[0];
 
                 if(Integer.parseInt(salaId) == id){
-                    // String capacidade = dados[1];
                     String filmeCodigo = dados[2];
 
                     if(Integer.parseInt(filmeCodigo) != 0){
@@ -221,8 +220,8 @@ public class SalaFileRepository implements ISalaRepository {
      * 
      * @param ingresso uma instância de Ingresso
      * @param numCadeira cadeira que o cliente deseja reservar
-     * @return Retorna <code>True</code> caso deu tudo certo a compra do ingresso 
-     *         e salvar no arquivo e <code>False</code> caso contrário.
+     * @return Retorna <code>True<code> caso deu tudo certo a compra do ingresso 
+     *         e salvar no arquivo e <code>False<code> caso contrário.
      */
     @Override
     public Boolean comprarIngresso(Ingresso ingresso, int numCadeira) {
@@ -246,8 +245,8 @@ public class SalaFileRepository implements ISalaRepository {
      * Método que verifica se essa cadeira já está presente no arquivo ingressos.txt
      * 
      * @param numCadeira número da cadeira que deseja verificar
-     * @return Retorna <code>True</code> caso deu tudo certo a verificação
-     *         e <code>False</code> caso contrário.
+     * @return Retorna <code>True<code> caso deu tudo certo a verificação
+     *         e <code>False<code> caso contrário.
      */
     @Override
     public Boolean findByNumCadeira(int numCadeira) {
@@ -279,8 +278,8 @@ public class SalaFileRepository implements ISalaRepository {
      * Método que realiza uma busca de todas as cadeiras ocupadas em uma determinada sala
      * 
      * @param salaId id da sala que deseja verifica a disponibilidade
-     * @return Retorna <code>List<Integer></code> caso tenha cadeiras ocupadas
-     *         e <code>null</code> caso contrário.
+     * @return Retorna <code>List<Integer><code> caso tenha cadeiras ocupadas
+     *         e <code>null<code> caso contrário.
      */
     @Override
     public List<Integer> getAllCadeirasOcupadas(int salaId){

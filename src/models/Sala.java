@@ -65,10 +65,10 @@ public class Sala implements Comparable<Sala> {
      * Override do método compareTo() da interface Comparable.
      * Esse método é sobrescrito para que possa ser possível a ordenação
      * de objetos Sala. A comparação e ordenação é feita a partir 
-     * de seus ids usando o próprio compare() da classe <code>Integer</code>.
+     * de seus ids usando o próprio compare() da classe <code>Integer<code>.
      *  
      * @param o - objeto sala
-     * @return um <code>integer</code> representando a comparação. 
+     * @return um <code>integer<code> representando a comparação. 
      * 0 - se for igual;
      * menor que 0 se o id do objeto for menor numericamente que do objeto passado por argumento;
      * maior que 0 se o id do objeto for maior numericamente que do objeto passado por argumento.
