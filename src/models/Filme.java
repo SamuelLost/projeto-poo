@@ -131,7 +131,6 @@ public class Filme implements Comparable<Filme> {
      */
 	@Override
 	public int compareTo(Filme o) {
-		// TODO Auto-generated method stub
 		return Integer.compare(this.codigo, o.getCodigo());
 	}
 }

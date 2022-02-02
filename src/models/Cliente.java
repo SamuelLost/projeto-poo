@@ -70,7 +70,6 @@ public class Cliente extends Pessoa implements Comparable<Cliente> {
      */
     @Override
     public int compareTo(Cliente o) {
-        // TODO Auto-generated method stub
         return this.nome.compareTo(o.getNome());
     }
 
