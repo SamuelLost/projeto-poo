@@ -9,6 +9,7 @@ import models.Estudante;
 import repository.IClienteRepository;
 import repository.IEstudanteRepository;
 import utils.Console;
+
 /**
  * Classe de serviços relacionados a entidade de cliente
  */
@@ -21,7 +22,8 @@ public class ClienteServices {
 
     /**
      * Construtor ClienteServices
-     * @param clientesRepository repositório de clientes
+     * 
+     * @param clientesRepository   repositório de clientes
      * @param estudantesRepository repositório de estudantes
      */
     public ClienteServices(
@@ -39,8 +41,9 @@ public class ClienteServices {
      * @see repository.IEstudanteRepository#findAllSiglas()
      * @see repository.IEstudanteRepository#addEstudante(Estudante)
      * 
-     * @throws ClienteServicesException Exceção no caso de tentar adicionar 
-     * um cliente com um CPF já existente na base de dados.
+     * @throws ClienteServicesException Exceção no caso de tentar adicionar
+     *                                  um cliente com um CPF já existente na base
+     *                                  de dados.
      */
     public void addCliente() throws ClienteServicesException {
         String cpf = "";
@@ -105,7 +108,7 @@ public class ClienteServices {
         }
 
     }
-    
+
     /**
      * Método de serviço responsável por obter todos os clientes do repositório
      * 
@@ -114,6 +117,14 @@ public class ClienteServices {
     public void getAllClientes() {
         List<Cliente> clientes = clientesRepository.getAllClientes();
         // clientes.sort(null);
+        if (clientes == null) {
+            System.out.println("Nenhum cliente foi encontrado!");
+            return;
+        } else if(clientes.isEmpty()) {
+            System.out.println("Nenhum cliente foi encontrado!");
+            return;
+        }
+
         for (Cliente cliente : clientes) {
             System.out.println(cliente);
         }
@@ -147,7 +158,8 @@ public class ClienteServices {
      * @see repository.IClienteRepository#updateCliente(Cliente)
      * 
      * 
-     * @throws ClienteServicesException Exceção no caso de atualizar um cliente com o CPF inexistente.
+     * @throws ClienteServicesException Exceção no caso de atualizar um cliente com
+     *                                  o CPF inexistente.
      */
     public void updateCliente() throws ClienteServicesException {
         Cliente cliente = null;
@@ -163,14 +175,13 @@ public class ClienteServices {
         if (cliente == null) {
             throw new ClienteServicesException("Cliente não encontrado!");
         }
-        
+
         Console.clear();
         System.out.println("Qual informação deseja alterar?");
         System.out.println("1 - Nome do cliente");
         System.out.println("2 - Idade do cliente");
-        System.out.println("3 - CPF do cliente");
-        System.out.println("4 - Matrícula do estudante");
-        System.out.println("5 - Faculdade do estudante");
+        System.out.println("3 - Matrícula do estudante");
+        System.out.println("4 - Faculdade do estudante");
         String opcao = sc.nextLine();
 
         System.out.print(mapUpdatedClienteMessage(Integer.parseInt(opcao)));
@@ -187,19 +198,14 @@ public class ClienteServices {
                 updatedSuccessCliente = this.clientesRepository.updateCliente(cliente);
                 this.statusUpdatedCliente(updatedSuccessCliente, "Idade");
                 break;
-            case 3:
-                cliente.setCpf(valueOp);
-                updatedSuccessCliente = this.clientesRepository.updateCliente(cliente);
-                this.statusUpdatedCliente(updatedSuccessCliente, "CPF");
-                break;
-            case 4: {
+            case 3: {
                 Estudante a = (Estudante) cliente;
                 a.setMatricula(valueOp);
                 updatedSuccessCliente = this.clientesRepository.updateCliente(a);
                 this.statusUpdatedCliente(updatedSuccessCliente, "Matrícula");
                 break;
             }
-            case 5: {
+            case 4: {
                 Estudante a = (Estudante) cliente;
                 a.setSiglaFaculdade(valueOp.toUpperCase());
                 updatedSuccessCliente = this.clientesRepository.updateCliente(a);
@@ -212,12 +218,13 @@ public class ClienteServices {
     }
 
     /**
-     * Método utilizado para imprimir uma mensagem de sucesso ou fala de acordo com 
+     * Método utilizado para imprimir uma mensagem de sucesso ou fala de acordo com
      * a informação que foi atualizada do cliente
      * 
-     * @param updatedSuccessCliente Será <code>True<code> se a atualização foi concluída com sucesso
-     * e caso contrário será <code>False<code>
-     * @param field O campo que foi atualizado
+     * @param updatedSuccessCliente Será <code>True<code> se a atualização foi
+     *                              concluída com sucesso
+     *                              e caso contrário será <code>False<code>
+     * @param field                 O campo que foi atualizado
      * @return Retorna uma mensagem de sucesso ou falha formatada
      */
     private String statusUpdatedCliente(Boolean updatedSuccessCliente, String field) {
@@ -231,6 +238,7 @@ public class ClienteServices {
     /**
      * Método que realiza o mapeamento da opção escolhida pelo usuário
      * relacionado ao compo que será atualizado
+     * 
      * @param op Opção escolhida pelo usuário
      * @return Retorna uma mensagem
      */
@@ -240,8 +248,6 @@ public class ClienteServices {
         } else if (op == 2) {
             return "Digite a nova idade do cliente: ";
         } else if (op == 3) {
-            return "Digite o novo CPF: ";
-        } else if (op == 4) {
             return "Digite a nova matrícula: ";
         } else {
             return "Digite a nova faculdade: ";

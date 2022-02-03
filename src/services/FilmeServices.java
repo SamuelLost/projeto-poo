@@ -1,6 +1,5 @@
 package services;
 
-import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -8,33 +7,45 @@ import exceptions.FilmeServicesException;
 import models.Filme;
 import repository.IFilmeRepository;
 import utils.Console;
+
 /**
  * Classe de serviços relacionados a entidade de filme
  */
 public class FilmeServices {
 
     Scanner sc = new Scanner(System.in);
-    
+
     private IFilmeRepository filmesRepository;
 
     /**
      * Construtor FilmeServices
+     * 
      * @param filmesRepository repositório de filmes
      */
     public FilmeServices(IFilmeRepository filmesRepository) {
         this.filmesRepository = filmesRepository;
-    }   
+    }
 
     /**
      * Método de serviço para adicionar um filme
      * 
      * @see repository.IFilmeRepository#addFilme(Filme)
-     * 
-     * @throws InputMismatchException Exceção no caso de o usuário entrar com um valor que não estamos esperado
+     *
      */
-    public void addFilme() throws InputMismatchException {
-        System.out.print("Código: ");
-        String codigo_filme = sc.nextLine();
+    public void addFilme() {
+        String codigo_filme = "";
+        Filme filmeAlreadyExist = null;
+        do {
+            System.out.print("Código: ");
+            codigo_filme = sc.nextLine();
+
+            filmeAlreadyExist = filmesRepository.findByCodigo(Integer.parseInt(codigo_filme));
+
+            if (filmeAlreadyExist != null) {
+                System.out.println("Código " + codigo_filme + " já existe, digite novamente");
+            }
+        } while(filmeAlreadyExist != null);
+
         System.out.print("Nome do Filme: ");
         String nome = sc.nextLine();
         System.out.print("Gênero: ");
@@ -48,10 +59,10 @@ public class FilmeServices {
         System.out.print("Sinopse: ");
         String sinopse = sc.nextLine();
         System.out.print("Duração do filme: ");
-        int duracao = sc.nextInt();
+        String duracao = sc.nextLine();
 
         boolean createdSuccessFilme = this.filmesRepository.addFilme(
-                new Filme(Integer.parseInt(codigo_filme), nome, genero, Integer.parseInt(minIdade) ,modalidade, idioma, sinopse, duracao));
+                new Filme(Integer.parseInt(codigo_filme), nome, genero, Integer.parseInt(minIdade), modalidade, idioma, sinopse, Integer.parseInt(duracao)));
         
         if(createdSuccessFilme){
             System.out.println("Filme inserido com sucesso!");
@@ -68,13 +79,16 @@ public class FilmeServices {
      */
     public void getAllFilmes() {
         List<Filme> filmes = this.filmesRepository.getAllFilmes();
-        
-        if(filmes.isEmpty()){
+
+        if (filmes == null) {
+            System.out.println("Nenhum filme foi encontrado!");
+            return;
+        } else if(filmes.isEmpty()) {
             System.out.println("Nenhum filme foi encontrado!");
             return;
         }
 
-        //filmes.sort(null);
+        // filmes.sort(null);
 
         for (Filme filme : filmes) {
             System.out.println(filme.toString());
@@ -82,7 +96,8 @@ public class FilmeServices {
     }
 
     /**
-     * Método de serviço que chama o repositório para excluir o filme da base de dados
+     * Método de serviço que chama o repositório para excluir o filme da base de
+     * dados
      * 
      * @see repository.IFilmeRepository#removeFilme(int)
      */
@@ -93,7 +108,7 @@ public class FilmeServices {
 
         boolean removedFilme = this.filmesRepository.removeFilme(codigoFilme);
 
-        if(removedFilme){
+        if (removedFilme) {
             System.out.println("Filme removido com sucesso!");
         } else {
             System.out.println("Não foi possível remover o filme!");
@@ -106,21 +121,22 @@ public class FilmeServices {
      * @see repository.IFilmeRepository#findByCodigo(int)
      * @see repository.IFilmeRepository#updateFilme(Filme)
      * 
-     * @throws FilmeServicesException Exceção no caso de atualizar um filme com um código inexistente.
+     * @throws FilmeServicesException Exceção no caso de atualizar um filme com um
+     *                                código inexistente.
      */
-    public void updateFilme() throws FilmeServicesException{
+    public void updateFilme() throws FilmeServicesException {
 
         Filme filme = null;
         boolean updatedSuccessFilme = false;
 
         this.getAllFilmes();
-        
+
         System.out.println("Digite o código do filme: ");
         String codigoFilme = sc.nextLine();
 
         filme = this.filmesRepository.findByCodigo(Integer.parseInt(codigoFilme));
-        
-        if(filme == null){
+
+        if (filme == null) {
             throw new FilmeServicesException("Filme não encontrado!");
         }
 
@@ -181,16 +197,17 @@ public class FilmeServices {
     }
 
     /**
-     * Método utilizado para imprimir uma mensagem de sucesso ou fala de acordo com 
+     * Método utilizado para imprimir uma mensagem de sucesso ou fala de acordo com
      * a informação que foi atualizada do filme
      * 
-     * @param updatedSuccessFilme Será <code>True<code> se a atualização foi concluída com sucesso
-     * e caso contrário será <code>False<code>
-     * @param field O campo que foi atualizado
+     * @param updatedSuccessFilme Será <code>True<code> se a atualização foi
+     *                            concluída com sucesso
+     *                            e caso contrário será <code>False<code>
+     * @param field               O campo que foi atualizado
      * @return Retorna uma mensagem de sucesso ou falha formatada
      */
-    private String statusUpdatedFilme(Boolean updatedSuccessFilme, String field){
-        if(updatedSuccessFilme){
+    private String statusUpdatedFilme(Boolean updatedSuccessFilme, String field) {
+        if (updatedSuccessFilme) {
             return "O campo " + field + " foi atualizado com sucesso!";
         } else {
             return "Não foi possível atualizar o campo " + field + "!";
@@ -200,23 +217,24 @@ public class FilmeServices {
     /**
      * Método que realiza o mapeamento da opção escolhida pelo usuário
      * relacionado ao compo que será atualizado
+     * 
      * @param op Opção escolhida pelo usuário
      * @return Retorna uma mensagem
      */
-    private String mapUpdatedFilmeMessage(int op){
-        if(op == 1){
+    private String mapUpdatedFilmeMessage(int op) {
+        if (op == 1) {
             return "Digite o novo nome do filme: ";
-        }else if(op == 2){
+        } else if (op == 2) {
             return "Digite o novo gênero do filme: ";
-        }else if(op == 3){
+        } else if (op == 3) {
             return "Digite a nova modalidade do filme: ";
-        }else if(op == 4){
+        } else if (op == 4) {
             return "Digite a nova classificação indicativa do filme: ";
-        }else if(op == 5){
+        } else if (op == 5) {
             return "Digite o novo idioma do filme: ";
-        }else if(op == 6){
+        } else if (op == 6) {
             return "Digite a nova sinopse do filme: ";
-        }else{
+        } else {
             return "Digite a nova duração do filme: ";
         }
     }

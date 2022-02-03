@@ -94,7 +94,9 @@ public class SalaFileRepository implements ISalaRepository {
 
                 line = br.readLine();
             }
-
+            if(!salas.isEmpty()) {
+                Collections.sort(salas);
+            }
             return salas;
         }catch (FileNotFoundException e) {
             return null;

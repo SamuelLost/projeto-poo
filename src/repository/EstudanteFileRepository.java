@@ -11,6 +11,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import models.Estudante;
@@ -86,7 +87,9 @@ public class EstudanteFileRepository implements IEstudanteRepository {
                 siglas.add(line);
                 line = br.readLine();
             }
-
+            if(!siglas.isEmpty()) {
+                Collections.sort(siglas);
+            }
             return siglas;
         } catch (FileNotFoundException e) {
             return null;

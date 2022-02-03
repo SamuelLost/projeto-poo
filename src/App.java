@@ -55,7 +55,7 @@ public class App {
                 estudanteRepository,
                 filmeRepository);
     }
-
+    @SuppressWarnings("resource") // Só para a warning do Scanner nunca fechado sumir
     public String selecionaOperacaoAdmin() throws SalaServicesException, FilmeServicesException {
 
         Scanner sc = new Scanner(System.in);
@@ -130,6 +130,7 @@ public class App {
 
     }
 
+    @SuppressWarnings("resource") // Só para a warning do Scanner nunca fechado sumir
     public String selecionaOperacaoCliente() throws SalaServicesException, ClienteServicesException {
         String op = null;
 
@@ -188,6 +189,7 @@ public class App {
         return op;
     }
 
+    @SuppressWarnings("resource") // Só para a warning do Scanner nunca fechado sumir
     public static void main(String[] args) throws Exception {
 
         boolean isAdmin = false;

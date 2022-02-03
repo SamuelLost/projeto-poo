@@ -1,15 +1,17 @@
 package services;
 
-import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
 
 import exceptions.SalaServicesException;
+
 import models.Cliente;
 import models.Estudante;
 import models.Filme;
 import models.Ingresso;
 import models.Sala;
+
 import repository.IClienteRepository;
 import repository.IEstudanteRepository;
 import repository.IFilmeRepository;
@@ -184,12 +186,9 @@ public class SalaServices {
             System.out.println("O valor da sua ingresso é R$20,00");
             valor = VALOR_INGRESSO_INTEIRA;
         }
-
-        int ingressoId = cliente.getCpf().hashCode();
-        
+        Random aleat = new Random();
+        int ingressoId = aleat.nextInt();
         ingressoId = Math.abs(ingressoId);
-        
-        System.out.println("HASH: " + ingressoId);
         
         boolean successCreateIngresso = this.salasRepository.comprarIngresso(
                 new Ingresso((ingressoId), cliente, sala, valor), cadeira);
@@ -380,8 +379,13 @@ public class SalaServices {
      */
     public void getAllSalas() {
         List<Sala> salas = this.salasRepository.getAllSalas();
-
-        Collections.sort(salas);
+        if(salas == null) {
+            System.out.println("Nenhuma sala cadastrada");
+            return;
+        } else if(salas.isEmpty()) {
+            System.out.println("Nenhuma sala cadastrada");
+            return;
+        }
         // salas.sort(null);
 
         for (Sala sala : salas) {

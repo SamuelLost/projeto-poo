@@ -80,7 +80,9 @@ public class FilmeFileRepository implements IFilmeRepository {
                         Integer.parseInt(duracao)));
                 line = br.readLine();
             }
-            Collections.sort(filmes);
+            if(!filmes.isEmpty()) {
+                Collections.sort(filmes);
+            }
             return filmes;
         } catch (FileNotFoundException e) {
             return null;

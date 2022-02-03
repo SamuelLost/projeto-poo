@@ -89,7 +89,9 @@ public class ClienteFileRepository implements IClienteRepository {
                 }
                 line = br.readLine();
             }
-            Collections.sort(clientes);
+            if(!clientes.isEmpty()) {
+                Collections.sort(clientes);
+            }
             return clientes;
         } catch (FileNotFoundException e) {
             return null;
