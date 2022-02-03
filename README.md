@@ -15,12 +15,12 @@ Professor: Atílio Gomes Luiz
 * O cinema pode ter uma ou mais salas.
 * O cinema deve ter um nome.
 * Deve ser possível obter a cidade do cinema.
-* O cinema tem um cliente do tipo administrador e outro tipo que representa um cliente comum.
+* O cinema tem no mínimo um administrador.
 
 ### 2.2 Entidade Sala
 
 * Um sala só pode exibir um filme por vez.
-* Uma sala deve possuir uma quantidade máxima de cadeiras.
+* Uma sala deve possuir uma quantidade máxima de cadeiras e fixa de 80 cadeiras.
 * Só poderá entrar na sala se o cliente tiver idade suficiente para a classificação indicativa do filme.
 * Deve ser possível remover uma sala.
 * Deve ser possível atualizar qualquer informação de uma sala cadastrado.
@@ -30,27 +30,23 @@ Professor: Atílio Gomes Luiz
 
 ### 2.3 Entidade Cliente
 
-* O cliente só pode estar em uma sala de cada vez.
 * Deve ser possível remover um cliente.
-* Dever ser possível realizar o cadastro de clientes nas salas (nome, idade, CPF).
+* Dever ser possível realizar o cadastro de clientes (nome, idade, CPF).
 * Deve ser possível atualizar qualquer informação de um cliente cadastrado.
 * Deve ser possível buscar um cliente pelo CPF
-* Deve ser possível buscar um cliente pela matrícula, caso seja um estudante.
-* Deve ser possível buscar um cliente pela sigla da faculdade, caso seja estudante.
 
 ### 2.4 Entidade Filme
 
-* O ingresso tem dois preços: meia e inteira.
 * Deve ser possível realizar cadastro de filmes (nome, código, duração, sinopse, gênero, idioma e modalidade (3D ou 2D)).
 * Deve ser possível remover um filme.
 * Deve ser possível atualizar qualquer informação de um filme cadastrado.
-* Deve ser possível buscar um filme pelo nome
+* Deve ser possível buscar um filme pelo código
 * Deve ser possível listar todos os filmes
-* Deve ser possível obter todos os filmes com uma determinada duração (em minutos).
 
-### 2.5 Considerações finais
-    É importante destacar que podem haver mudanças no decorrer do desenvolvimento do sistema.
+### 2.4 Entidade Ingresso
 
+* O ingresso tem dois preços: meia e inteira.
+* O ingresso pertence a um cliente
 ## Diagrama de Classes - UML
 * Diagrama completo de todos os pacotes
 ![Diagrama completo](docs/diagrama.png)
@@ -63,4 +59,18 @@ Professor: Atílio Gomes Luiz
 
 ## 2.5 Mapeamento dos dados nos arquivos
 
-Pode ser visualizado no seguinte arquivo `docs/mapeamento-dados-arquivo.txt`
+Pode ser visualizado no seguinte arquivo [Mapeamento de Dados](docs/mapeamento-dados-arquivo.txt)
+
+## 3. Como executar o projeto
+
+Basta abrir o terminal na pasta do projeto e encontar o arquivo [Projeto-Final.jar](./Projeto-Final.jar). Com o terminal aberto, bastar executar o seguinte comando no terminal:
+
+```sh
+    java -jar Projeto-Final.jar
+```
+
+Após isso, o programa com o método *main* é executado em seu terminal, tornando o projeto livre da IDE.
+
+## 4. Relatório
+
+O relatório final do projeto pode ser encontrado [aqui](./Relatorio-Projeto-Cinema-Anderson-Samuel.pdf).
