@@ -103,7 +103,7 @@ public class SalaServices {
      */
     public void comprarIngresso() throws SalaServicesException {
         List<Sala> salas = this.salasRepository.getAllSalas();
-        System.out.println("==============================");
+        System.out.println("===========================================");
         for (Sala sala : salas) {
             if (sala.getFilme() != null) {
                 System.out.println(String.format("Sala %d - %s - classificação indicativa: %d", sala.getId(), sala.getFilme().getNome(), sala.getFilme().getMinIdade()));
@@ -179,11 +179,11 @@ public class SalaServices {
                 throw new SalaServicesException("Você não está vinculado a nenhuma universidade que possuí convênio!");
             }
             
-            System.out.println("O valor da seu ingresso é R$10,00");
+            System.out.println("O valor do seu ingresso é R$10,00");
             valor = VALOR_INGRESSO_MEIA;
 
         } else {
-            System.out.println("O valor da sua ingresso é R$20,00");
+            System.out.println("O valor do seu ingresso é R$20,00");
             valor = VALOR_INGRESSO_INTEIRA;
         }
         Random aleat = new Random();
@@ -270,19 +270,19 @@ public class SalaServices {
                     if (cadeiras[i][j].equals("x")) {
                         //\033[31m - cor vermelha
                         //\033[0m - fim do código ANSI
-                        System.out.print(" \033[31m" + cadeiras[i][j] + "\033[0m ");
+                        System.out.print(" \033[91m" + cadeiras[i][j] + "\033[0m ");
                     } else {
                         //Se for menor que 10, para imprimir um espaço antes
                         if ((Integer.parseInt(cadeiras[i][j]) < 10))
                             if (i > 0 && j > 0)
                                 //\033[31m - cor verde
                                 //\033[0m - fim do código ANSI
-                                System.out.print(" \033[32m" + cadeiras[i][j] + "\033[0m ");
+                                System.out.print(" \033[92m" + cadeiras[i][j] + "\033[0m ");
                             else
                                 //Imprimindo um espaço antes para alinhar
                                 System.out.print(" " + cadeiras[i][j] + " ");
                         else {
-                            System.out.print("\033[32m" + cadeiras[i][j] + "\033[0m ");
+                            System.out.print("\033[92m" + cadeiras[i][j] + "\033[0m ");
                         }
                     }
                 } else if (j < 10) { // Para imprimir as bordas-colunas até o 9 com espaço antes
@@ -402,12 +402,10 @@ public class SalaServices {
      */
     public void removeSala() {
 
-        List<Sala> salas = this.salasRepository.getAllSalas();
+        // List<Sala> salas = this.salasRepository.getAllSalas();
 
         System.out.println("=================================");
-        for (Sala sala : salas) {
-            System.out.print(sala);
-        }
+        this.getAllSalas();
 
         System.out.print("Digite o id da sala: ");
         int salaId = sc.nextInt();
