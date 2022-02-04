@@ -1,6 +1,6 @@
 <mxfile host="65bd71144e">
     <diagram id="0D2AwkG7d8j1suygumKX" name="Page-1">
-        <mxGraphModel dx="2067" dy="1903" grid="1" gridSize="10" guides="0" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" background="#FFFFFF" math="0" shadow="0">
+        <mxGraphModel dx="1391" dy="1622" grid="1" gridSize="10" guides="0" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" background="#FFFFFF" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -229,7 +229,7 @@
                         <mxPoint as="offset"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="120" style="edgeStyle=none;html=1;startArrow=none;startFill=0;endArrow=block;endFill=0;startSize=24;endSize=24;fontSize=14;strokeWidth=2;entryX=0.466;entryY=1.071;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" edge="1" target="64">
+                <mxCell id="120" style="edgeStyle=none;html=1;startArrow=none;startFill=0;endArrow=block;endFill=0;startSize=24;endSize=24;fontSize=14;strokeWidth=2;entryX=0.466;entryY=1.071;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" target="64" edge="1">
                     <mxGeometry relative="1" as="geometry">
                         <mxPoint x="1317" y="1010" as="targetPoint"/>
                         <mxPoint x="1317" y="1138" as="sourcePoint"/>
@@ -458,7 +458,7 @@
                 <mxCell id="210" value="+ clear(): void" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=14;fontStyle=4" parent="207" vertex="1">
                     <mxGeometry y="34" width="258" height="26" as="geometry"/>
                 </mxCell>
-                <mxCell id="233" value="&lt;font style=&quot;font-size: 22px&quot;&gt;1&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+                <mxCell id="233" value="&lt;font style=&quot;font-size: 22px&quot;&gt;0..1&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
                     <mxGeometry x="358" y="440" width="60" height="30" as="geometry"/>
                 </mxCell>
                 <mxCell id="235" value="&lt;font style=&quot;font-size: 22px&quot;&gt;1&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
@@ -491,7 +491,7 @@
                 <mxCell id="248" value="" style="line;strokeWidth=2;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;fontSize=14;" parent="244" vertex="1">
                     <mxGeometry y="104" width="358" height="8" as="geometry"/>
                 </mxCell>
-                <mxCell id="324" value="+ Pessoa(nome: String, cpf: String, idade: short): void" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=14;" vertex="1" parent="244">
+                <mxCell id="324" value="+ Pessoa(nome: String, cpf: String, idade: short): void" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=14;" parent="244" vertex="1">
                     <mxGeometry y="112" width="358" height="28" as="geometry"/>
                 </mxCell>
                 <mxCell id="250" value="+ setNome(nome: String): void" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=14;" parent="244" vertex="1">
@@ -515,7 +515,7 @@
                 <mxCell id="256" value="+ toString(): String" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=14;fontStyle=0" parent="244" vertex="1">
                     <mxGeometry y="296" width="358" height="26" as="geometry"/>
                 </mxCell>
-                <mxCell id="323" value="+ compareTo(o: Pessoa): int" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=14;fontStyle=0" vertex="1" parent="244">
+                <mxCell id="323" value="+ compareTo(o: Pessoa): int" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontSize=14;fontStyle=0" parent="244" vertex="1">
                     <mxGeometry y="322" width="358" height="26" as="geometry"/>
                 </mxCell>
                 <mxCell id="257" style="edgeStyle=none;html=1;startArrow=none;startFill=0;endArrow=block;endFill=0;startSize=24;endSize=24;fontSize=14;strokeWidth=2;" parent="1" edge="1">
